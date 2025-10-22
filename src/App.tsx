@@ -12,7 +12,6 @@ function App() {
             shouldRetryOnError: SHOULD_RETRY_ON_ERROR,
             errorRetryInterval: ERROR_RETRY_INTERVAL,
             errorRetryCount: ERROR_RETRY_COUNT,
-            //TODO: onError
         }}>
             <AccessibilityProvider>
                 <div className={styles.wrapper}>
