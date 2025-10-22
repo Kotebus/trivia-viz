@@ -1,7 +1,7 @@
-import {Tooltip, BarChart, YAxis, XAxis, Bar, Cell} from 'recharts';
-import type {ChartDataItem} from "../../types/components.ts";
-import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
 import {type CSSProperties, use} from "react";
+import {Bar, BarChart, Cell, Tooltip, XAxis, YAxis} from 'recharts';
+import type {ChartDataItem} from "../../types/components.ts";
+import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
 import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 import type {Margin} from "recharts/types/util/types";
 
@@ -75,5 +75,3 @@ export function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
         </figure>
     );
 }
-
-export default CategoryChart;

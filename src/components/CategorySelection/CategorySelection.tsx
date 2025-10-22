@@ -8,9 +8,9 @@ interface CategorySelectionProps {
 
 const ALL_CATEGORY_VALUE = 'all';
 
-function CategorySelection(
+export const CategorySelection = (
     {categoriesList, activeCategoryName = ALL_CATEGORY_VALUE, selectCategory} : CategorySelectionProps
-) {
+) => {
 
     const selectionId = "category-select-" + useId();
 
@@ -48,5 +48,3 @@ function CategorySelection(
         </>
     );
 }
-
-export default CategorySelection;

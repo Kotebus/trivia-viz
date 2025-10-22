@@ -1,16 +1,16 @@
+import {useCallback, useState} from "react";
 import useSWR from "swr";
 import {fetchQuestions} from "../../api/trivia.ts";
-import styles from "./Dashboard.module.css";
-import {useCallback, useState} from "react";
 import {useGetCategoryData} from "../../hooks/useGetCategoryData.ts";
-import CategoryChart from "../CategoryChart/CategoryChart.tsx";
-import CategorySelection from "../CategorySelection/CategorySelection.tsx";
-import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
-import LoadingPage from "../LoadingPage/LoadingPage.tsx";
+import {CategoryChart} from "../CategoryChart/CategoryChart.tsx";
+import {CategorySelection} from "../CategorySelection/CategorySelection.tsx";
+import {CategoryDifficultyChart} from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
+import {LoadingPage} from "../LoadingPage/LoadingPage.tsx";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
-import FetchErrorMessage from "../FetchErrorMessage/FetchErrorMessage.tsx";
+import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
 import type {Question} from "../../types/trivia.ts";
+import styles from "./Dashboard.module.css";
 
 interface ActiveCategory {
     name: string;

@@ -4,7 +4,7 @@ import styles from './Spinner.module.css';
 
 const SPINNER_SIZE = 24;
 
-function Spinner() {
+export const Spinner = () => {
     return (
         <span
             className={styles.wrapper}
@@ -19,5 +19,3 @@ function Spinner() {
     </span>
     );
 }
-
-export default Spinner;

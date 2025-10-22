@@ -1,7 +1,7 @@
-import {type Difficulty} from "../../types/trivia.ts";
-import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
-import type {ChartDataItem} from "../../types/components.ts";
 import {use} from "react";
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
+import {type Difficulty} from "../../types/trivia.ts";
+import type {ChartDataItem} from "../../types/components.ts";
 import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 
 const CHART_HEIGHT = 250;
@@ -24,7 +24,7 @@ interface DifficultyChartProps {
     chartData: ChartDataItem[];
 }
 
-function DifficultyChart({chartData}:DifficultyChartProps) {
+export const DifficultyChart = ({chartData}:DifficultyChartProps) => {
     const accessibilityContext = use(AccessibilityContext);
 
     const isContrastMode = accessibilityContext?.isHighContrast ?? false;
@@ -60,5 +60,3 @@ function DifficultyChart({chartData}:DifficultyChartProps) {
             </ResponsiveContainer>
     );
 }
-
-export default DifficultyChart;

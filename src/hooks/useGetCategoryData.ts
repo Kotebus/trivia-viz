@@ -1,5 +1,5 @@
-import {type Question} from "../types/trivia.ts";
 import {useMemo} from "react";
+import {type Question} from "../types/trivia.ts";
 import type {ChartDataItem} from "../types/components.ts";
 
 /**

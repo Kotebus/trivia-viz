@@ -11,7 +11,7 @@ const checkMediaQuery = (query: string) =>
         window.matchMedia &&
         window.matchMedia(query).matches);
 
-function AccessibilityProvider({ children }:PropsWithChildren) {
+export const AccessibilityProvider = ({ children }:PropsWithChildren) => {
     const isHighContrast = checkMediaQuery("(prefers-contrast: more)");
     const isMotionReduced = checkMediaQuery("(prefers-reduced-motion: reduce)");
 
@@ -21,5 +21,3 @@ function AccessibilityProvider({ children }:PropsWithChildren) {
         </AccessibilityContext>
     );
 }
-
-export default AccessibilityProvider;

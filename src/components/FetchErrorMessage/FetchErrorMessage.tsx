@@ -2,7 +2,7 @@ import type {PropsWithChildren} from "react";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import styles from "./FetchErrorMessage.module.css";
 
-function FetchErrorMessage({children}: PropsWithChildren) {
+export const FetchErrorMessage = ({children}: PropsWithChildren) => {
     return (
         <div role={'alert'} className={styles.wrapper}>
             <h2>Failed to load data</h2>
@@ -15,5 +15,3 @@ function FetchErrorMessage({children}: PropsWithChildren) {
         </div>
     );
 }
-
-export default FetchErrorMessage;

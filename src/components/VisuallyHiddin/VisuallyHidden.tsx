@@ -41,13 +41,10 @@ interface VisuallyHiddenProps extends PropsWithChildren {
  * </VisuallyHidden>
  * ```
  */
-const VisuallyHidden = ({ children, ariaLive }: VisuallyHiddenProps) => {
+export const VisuallyHidden = ({ children, ariaLive }: VisuallyHiddenProps) => {
     return (
         <span aria-live={ariaLive} style={hiddenStyles}>
            {children}
        </span>
     );
 };
-
-
-export default VisuallyHidden;

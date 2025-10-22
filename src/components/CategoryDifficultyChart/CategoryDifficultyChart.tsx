@@ -1,9 +1,9 @@
 import {useGetDifficultyData} from "../../hooks/useGetDifficultyData.ts";
-import DifficultyChart from "../DifficultyChart/DifficultyChart.tsx";
+import {DifficultyChart} from "../DifficultyChart/DifficultyChart.tsx";
 import type {Question} from "../../types/trivia.ts";
 import style from "./CategoryDifficultyChart.module.css";
 import {useMemo} from "react";
-import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
 
 interface CategoryDifficultyChartProps {
     category?: string;
@@ -11,7 +11,7 @@ interface CategoryDifficultyChartProps {
     allCategoriesLabel: string;
 }
 
-const CategoryDifficultyChart =
+export const CategoryDifficultyChart =
     ({category, data, allCategoriesLabel}: CategoryDifficultyChartProps) => {
 
     const filteredData = useMemo(() => {
@@ -47,5 +47,3 @@ const CategoryDifficultyChart =
         </figure>
     );
 }
-
-export default CategoryDifficultyChart;

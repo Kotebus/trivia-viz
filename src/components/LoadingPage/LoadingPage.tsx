@@ -1,8 +1,8 @@
 import styles from "./LoadingPage.module.css";
-import Spinner from "../Spinner";
-import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {Spinner} from "../Spinner/Spinner.tsx";
 
-function LoadingPage() {
+export const LoadingPage = () => {
     return (
         <div
             className={styles.wrapper}
@@ -17,5 +17,3 @@ function LoadingPage() {
         </div>
     );
 }
-
-export default LoadingPage;
