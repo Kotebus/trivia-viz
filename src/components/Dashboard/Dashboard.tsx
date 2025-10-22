@@ -23,7 +23,7 @@ interface DashboardProps {
     sourceData?: Question[];
 }
 
-export function Dashboard({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) {
+export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) => {
     const {data, isLoading, error} = useSWR(
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(sourceData ? 0 : fetchDataAmount)

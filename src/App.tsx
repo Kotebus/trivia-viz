@@ -11,7 +11,7 @@ export interface AppProps {
     data?: Question[];
 }
 
-export function App({appConfig = DefaultAppConfig, data}: AppProps) {
+export const App = ({appConfig = DefaultAppConfig, data}: AppProps) => {
     return (
         <SWRConfig value={{
             revalidateOnFocus: false,

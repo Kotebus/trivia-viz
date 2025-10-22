@@ -1,7 +1,7 @@
 import type {HeaderConfig} from "../../AppConfig.ts";
 import styles from './Header.module.css';
 
-export function Header({config}: { config: HeaderConfig }) {
+export const Header = ({config}: { config: HeaderConfig }) => {
     return (
         <header className={styles.header}>
             <h1 className={styles.title}>{config.title}</h1>

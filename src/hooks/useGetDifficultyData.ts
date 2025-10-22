@@ -1,6 +1,6 @@
 import {useMemo} from "react";
-import type {ChartDataItem} from "../types/components.ts";
-import {type Difficulty, type Question} from "../types/trivia.ts";
+import type {ChartDataItem} from "../types/ChartDataItem.ts";
+import type {Difficulty, Question} from "../types/trivia.ts";
 
 /**
  * Transforms data with questions into a chart-ready format grouped by difficulty level.
