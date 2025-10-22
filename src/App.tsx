@@ -4,8 +4,13 @@ import AccessibilityProvider from "./providers/AccessibilityProvider/Accessibili
 import {API_CONFIG} from "./api/ApiConfig.ts";
 import {Header} from "./components/Header/Header.tsx";
 import {type AppConfig, DefaultAppConfig} from "./AppConfig.ts";
+import type {Question} from "./types/trivia.ts";
 
-function App({appConfig = DefaultAppConfig}: {appConfig?: AppConfig}) {
+export interface AppProps {
+    appConfig?: AppConfig;
+    data?: Question[];
+}
+function App({appConfig = DefaultAppConfig, data}: AppProps) {
     return (
         <SWRConfig value={{
             revalidateOnFocus: false,
@@ -17,6 +22,7 @@ function App({appConfig = DefaultAppConfig}: {appConfig?: AppConfig}) {
             <AccessibilityProvider>
                 {appConfig.header && (<Header config={appConfig.header}/>)}
                 <Dashboard
+                    sourceData={data}
                     fetchDataAmount={appConfig.fetchDataAmount}
                     allDataLabel={appConfig.allDataLabel}
                 />

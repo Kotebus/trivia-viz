@@ -31,8 +31,9 @@ interface Props {
 export function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
     const accessibilityContext = use(AccessibilityContext);
 
-    if (chartData.length === 0)
+    if (chartData.length === 0) {
         return (<div>No data to display.</div>);
+    }
 
     const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
 

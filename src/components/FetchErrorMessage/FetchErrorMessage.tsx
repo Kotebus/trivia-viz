@@ -1,9 +1,10 @@
-import {API_CONFIG} from "../../api/ApiConfig.ts";
 import type {PropsWithChildren} from "react";
+import {API_CONFIG} from "../../api/ApiConfig.ts";
+import styles from "./FetchErrorMessage.module.css";
 
 function FetchErrorMessage({children}: PropsWithChildren) {
     return (
-        <div role={'alert'}>
+        <div role={'alert'} className={styles.wrapper}>
             <h2>Failed to load data</h2>
             {children}
             {API_CONFIG.SHOULD_RETRY_ON_ERROR && (

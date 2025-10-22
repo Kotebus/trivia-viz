@@ -15,19 +15,26 @@ const CategoryDifficultyChart =
     ({category, data, allCategoriesLabel}: CategoryDifficultyChartProps) => {
 
     const filteredData = useMemo(() => {
-        if (!data) return [];
-        if (!category) return data;
+        if (!data) {
+            return [];
+        }
+
+        if (!category) {
+            return data;
+        }
+
         return data.filter(x => x.category === category);
     }, [data, category]);
 
     const categoryChartData = useGetDifficultyData(filteredData);
     const categoryName = category ?? allCategoriesLabel;
 
-    if (filteredData.length === 0)
+    if (filteredData.length === 0) {
         return (
             <div className={style.empty}>
                 <strong>{categoryName}</strong>: no data.
             </div>);
+    }
 
     return (
         <figure aria-label={`${categoryName} difficulty distribution`}>

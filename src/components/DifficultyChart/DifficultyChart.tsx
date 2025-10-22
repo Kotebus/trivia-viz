@@ -30,7 +30,9 @@ function DifficultyChart({chartData}:DifficultyChartProps) {
     const isContrastMode = accessibilityContext?.isHighContrast ?? false;
     const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
 
-    if (chartData.length === 0) return null;
+    if (chartData.length === 0) {
+        return null;
+    }
 
     const colors = isContrastMode ? COLORS.contrast : COLORS.regular;
     return (

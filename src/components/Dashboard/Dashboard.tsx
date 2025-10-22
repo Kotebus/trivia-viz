@@ -10,6 +10,7 @@ import LoadingPage from "../LoadingPage/LoadingPage.tsx";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
 import FetchErrorMessage from "../FetchErrorMessage/FetchErrorMessage.tsx";
+import type {Question} from "../../types/trivia.ts";
 
 interface ActiveCategory {
     name: string;
@@ -19,12 +20,13 @@ interface ActiveCategory {
 interface DashboardProps {
     fetchDataAmount: number;
     allDataLabel: string;
+    sourceData?: Question[];
 }
 
-export function Dashboard({fetchDataAmount, allDataLabel}: DashboardProps) {
+export function Dashboard({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) {
     const { data, isLoading, error } = useSWR(
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
-        () => fetchQuestions(fetchDataAmount)
+        () => fetchQuestions(sourceData ? 0 : fetchDataAmount)
     );
     const questions = useHtmlDecodedCategoriesData(data);
 
@@ -49,50 +51,57 @@ export function Dashboard({fetchDataAmount, allDataLabel}: DashboardProps) {
         [categoryChartData]
     );
 
-    if (isLoading)
+    if (isLoading) {
         return (<LoadingPage/>);
+    }
 
     const errorMessage = error ?
         <FetchErrorMessage><p>{error.message}</p></FetchErrorMessage> : null;
 
-    if (error && data === undefined)
+    if (error && data === undefined) {
         return errorMessage;
+    }
 
-    if (data?.length === 0)
+    if (data?.length === 0) {
         return (<div>No data.</div>);
+    }
 
     return (
         <div className={styles.grid}>
-            <div className={styles.header}>
-                <CategorySelection
-                    categoriesList={categoriesNames}
-                    activeCategoryName={activeCategory?.name}
-                    selectCategory={handleSelectCategory}
-                />
-            </div>
             {errorMessage}
-            <main>
-                <CategoryChart
-                    chartData={categoryChartData}
-                    activeIndex={activeCategory?.index}
-                    setActiveIndex={setActiveCategoryByIndex}
-                />
-            </main>
+            {data !== undefined && (
+                <>
+                    <div className={styles.header}>
+                        <CategorySelection
+                            categoriesList={categoriesNames}
+                            activeCategoryName={activeCategory?.name}
+                            selectCategory={handleSelectCategory}
+                        />
+                    </div>
+                    <main>
+                        <CategoryChart
+                            chartData={categoryChartData}
+                            activeIndex={activeCategory?.index}
+                            setActiveIndex={setActiveCategoryByIndex}
+                        />
+                    </main>
 
-            <aside>
-                <CategoryDifficultyChart
-                    allCategoriesLabel={allDataLabel}
-                    data={questions}
-                />
+                    <aside>
+                        <CategoryDifficultyChart
+                            allCategoriesLabel={allDataLabel}
+                            data={questions}
+                        />
 
-                {activeCategory && (
-                    <CategoryDifficultyChart
-                        allCategoriesLabel={allDataLabel}
-                        category={activeCategory.name}
-                        data={questions}
-                    />
-                )}
-            </aside>
+                        {activeCategory && (
+                            <CategoryDifficultyChart
+                                allCategoriesLabel={allDataLabel}
+                                category={activeCategory.name}
+                                data={questions}
+                            />
+                        )}
+                    </aside>
+                </>
+            )}
         </div>
     );
 }

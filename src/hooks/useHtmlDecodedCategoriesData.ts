@@ -20,7 +20,9 @@ export const  useHtmlDecodedCategoriesData =
     (data: Question[] | undefined): Question[] => {
 
     return useMemo(() => {
-        if (!data || data.length === 0) return [];
+        if (!data || data.length === 0) {
+            return [];
+        }
 
         return data.map(item => ({
             ...item,

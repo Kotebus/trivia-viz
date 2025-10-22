@@ -24,7 +24,9 @@ import type {ChartDataItem} from "../types/components.ts";
  */
 export const useGetDifficultyData = (data: Question[] | undefined): ChartDataItem[] => {
     return useMemo(() => {
-        if (!data || data.length === 0) return [];
+        if (!data || data.length === 0) {
+            return [];
+        }
 
         const difficultyMap = data.reduce((
             accumulator,

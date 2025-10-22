@@ -25,7 +25,9 @@ import type {ChartDataItem} from "../types/components.ts";
  */
 export const useGetCategoryData = (data: Question[] | undefined): ChartDataItem[] => {
     return useMemo(() => {
-        if (!data || data.length === 0) return [];
+        if (!data || data.length === 0) {
+            return [];
+        }
 
         const categoryMap = data.reduce((accumulator, question) => {
             const category = question.category;
