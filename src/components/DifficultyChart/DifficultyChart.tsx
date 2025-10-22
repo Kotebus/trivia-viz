@@ -1,8 +1,8 @@
 import {type Difficulty} from "../../types/trivia.ts";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 import type {ChartDataItem} from "../../types/components.ts";
-import {useReduceMotionMode} from "../../hooks/useReduceMotionMode.ts";
-import {useContrastMode} from "../../hooks/useContrastMode.ts";
+import {use} from "react";
+import {AccessibilityContext} from "../../AccessibilityProvider/AccessibilityContext.tsx";
 
 const COLORS = {
     easy: 'hsl(95, 75%, 31%)',
@@ -20,8 +20,10 @@ interface DifficultyChartProps {
 }
 
 function DifficultyChart({chartData}:DifficultyChartProps) {
-    const isContrastMode = useContrastMode();
-    const isMotionReduced = useReduceMotionMode();
+    const accessibilityContext = use(AccessibilityContext);
+
+    const isContrastMode = accessibilityContext?.isHighContrast ?? false;
+    const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
 
     if (chartData.length === 0) return;
 
