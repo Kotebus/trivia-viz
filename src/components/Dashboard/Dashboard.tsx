@@ -81,7 +81,7 @@ export function Dashboard() {
 
                 {activeCategory && (
                     <CategoryDifficultyChart
-                        category={activeCategory?.name}
+                        category={activeCategory.name}
                         data={questions}
                     />
                 )}
