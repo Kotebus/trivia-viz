@@ -1,10 +1,11 @@
 import styles from './Header.module.css';
+import type {HeaderConfig} from "../../AppConfig.ts";
 
-export function Header() {
+export function Header({config}: { config: HeaderConfig }) {
     return (
         <header className={styles.header}>
-            <h1 className={styles.title}>Trivia Analytics Dashboard</h1>
-            <p className={styles.subtitle}>Categories and difficulty statistics</p>
+            <h1 className={styles.title}>{config.title}</h1>
+            { config.subtitle && (<p className={styles.subtitle}>{config.subtitle}</p>)}
         </header>
     );
 }

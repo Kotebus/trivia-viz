@@ -16,10 +16,15 @@ interface ActiveCategory {
     index: number;
 }
 
-export function Dashboard() {
+interface DashboardProps {
+    fetchDataAmount: number;
+    allDataLabel: string;
+}
+
+export function Dashboard({fetchDataAmount, allDataLabel}: DashboardProps) {
     const { data, isLoading, error } = useSWR(
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
-        () => fetchQuestions(API_CONFIG.QUESTIONS_AMOUNT)
+        () => fetchQuestions(fetchDataAmount)
     );
     const questions = useHtmlDecodedCategoriesData(data);
 
@@ -76,11 +81,13 @@ export function Dashboard() {
 
             <aside>
                 <CategoryDifficultyChart
+                    allCategoriesLabel={allDataLabel}
                     data={questions}
                 />
 
                 {activeCategory && (
                     <CategoryDifficultyChart
+                        allCategoriesLabel={allDataLabel}
                         category={activeCategory.name}
                         data={questions}
                     />

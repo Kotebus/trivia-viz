@@ -5,15 +5,14 @@ import style from "./CategoryDifficultyChart.module.css";
 import {useMemo} from "react";
 import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
 
-const ALL_CATEGORIES = "All categories";
-
 interface CategoryDifficultyChartProps {
     category?: string;
     data: Question[] | undefined;
+    allCategoriesLabel: string;
 }
 
 const CategoryDifficultyChart =
-    ({category, data}: CategoryDifficultyChartProps) => {
+    ({category, data, allCategoriesLabel}: CategoryDifficultyChartProps) => {
 
     const filteredData = useMemo(() => {
         if (!data) return [];
@@ -22,7 +21,7 @@ const CategoryDifficultyChart =
     }, [data, category]);
 
     const categoryChartData = useGetDifficultyData(filteredData);
-    const categoryName = category ?? ALL_CATEGORIES;
+    const categoryName = category ?? allCategoriesLabel;
 
     if (filteredData.length === 0)
         return (
