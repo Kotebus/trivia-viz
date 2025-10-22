@@ -3,6 +3,7 @@ import {
     BarChart, YAxis, XAxis, Bar, Cell
 } from 'recharts';
 import type {ChartDataItem} from "../../types/components.ts";
+import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
 
 interface Props {
     chartData: ChartDataItem[];
@@ -18,7 +19,7 @@ export default function CategoryChart({chartData, selectCategory, activeIndex, s
     }
 
     return (
-        <>
+        <figure>
             <BarChart
                 style={{ width: '100%', maxHeight: '70vh', aspectRatio: 1, paddingRight: '1rem' }}
                 responsive
@@ -42,6 +43,9 @@ export default function CategoryChart({chartData, selectCategory, activeIndex, s
                     ))}
                 </Bar>
             </BarChart>
-        </>
+            <figcaption>
+                <VisuallyHidden>Distribution by category</VisuallyHidden>
+            </figcaption>
+        </figure>
     );
 }

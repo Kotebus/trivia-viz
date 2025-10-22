@@ -1,0 +1,13 @@
+figcaption span {
+    display: block;
+}
+
+figcaption .category {
+    font-size: 1.06rem ;
+    font-weight: 600;
+}
+
+figcaption .count {
+    font-size: 1.02rem ;
+    color: #666;
+}
