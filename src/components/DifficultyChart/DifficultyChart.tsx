@@ -3,9 +3,11 @@ import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "rechart
 import type {ChartDataItem} from "../../types/components.ts";
 
 const COLORS = {
-    easy: 'hsl(89.06deg 57.66% 56.47%)',
-    medium: 'hsl(46.45deg 100% 48.63%)',
-    hard: 'hsl(0, 84%, 60%)',
+    easy:   'rgb(70, 140, 20)',
+     medium: 'rgb(255,167,52)',
+     hard: 'rgb(239, 67, 67)',
+//     medium: 'rgb(210, 120, 20)',
+//     hard:   'rgb(200, 30, 30)',
 };
 
 interface DifficultyChartProps {
@@ -26,7 +28,8 @@ function DifficultyChart({chartData}:DifficultyChartProps) {
                         label
                     >
                         {chartData.map((entry) => (
-                            <Cell key={entry.name} fill={COLORS[entry.name as Difficulty]} />
+                            <Cell key={entry.name}
+                                  fill={COLORS[entry.name as Difficulty]} />
                         ))}
                     </Pie>
                     <Tooltip />

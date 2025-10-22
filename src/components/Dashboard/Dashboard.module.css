@@ -25,7 +25,6 @@
     display: flex;
     place-content: center;
     justify-content: flex-start;
-    /*padding-left: 2rem;*/
 }
 
 aside {
@@ -41,6 +40,7 @@ aside {
 
 aside figure {
     flex-grow: 1;
+    margin: 5px 5px;
 
     @media (max-width: var(--max-width-query)) {
         display: flex;
@@ -48,10 +48,6 @@ aside figure {
         align-items: center;
         flex-direction: column;
     }
-}
-
-aside figure {
-    margin: 5px 5px;
 }
 
 main {

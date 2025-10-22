@@ -14,8 +14,6 @@ const CategoryDifficultyChart = ({category, data}:CategoryDifficultyChartProps) 
     const categoryChartData = useGetDifficultyData(filteredData);
     return (
         <figure>
-            {/*<h3>{category ?? "All categories"}</h3>*/}
-            {/*<p>Total: {filteredData?.length}</p>*/}
             <figcaption>
                 <span className={style.category}>{category ?? "All categories"}</span>
                 <span className={style.count}>Total: {filteredData?.length}</span>

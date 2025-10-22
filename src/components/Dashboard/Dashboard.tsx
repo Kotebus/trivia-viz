@@ -7,12 +7,14 @@ import {useGetCategoryData} from "../../hooks/useGetCategoryData.ts";
 import CategoryChart from "../CategoryChart/CategoryChart.tsx";
 import CategorySelection from "../CategorySelection/CategorySelection.tsx";
 import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
+import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY, REFRESH_INTERVAL} from "../../configuration/constants.ts";
+import LoadingPage from "../LoadingPage/LoadingPage.tsx";
 
 export function Dashboard() {
     const { data, isLoading, error } = useSWR(
-        ["questions"],
-        () => fetchQuestions(100),
-        { refreshInterval: 0 }
+        [QUESTIONS_REQUEST_KEY],
+        () => fetchQuestions(QUESTIONS_AMOUNT),
+        { refreshInterval: REFRESH_INTERVAL }
     );
 
     const questions = data?.map(item => ({
@@ -31,8 +33,7 @@ export function Dashboard() {
         setActiveCategoryIndex(categoryChartData.findIndex(x => x.name === categoryName));
     }
 
-    if (isLoading) return <div>Loading</div>//TODO: loader
-
+    if (isLoading) return (<LoadingPage/>);
 
     return (
         <div className={styles.grid}>
