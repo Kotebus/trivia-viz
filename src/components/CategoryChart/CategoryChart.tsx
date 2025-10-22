@@ -1,11 +1,12 @@
-import {
-    Tooltip,
-    BarChart, YAxis, XAxis, Bar, Cell
-} from 'recharts';
+import {Tooltip, BarChart, YAxis, XAxis, Bar, Cell} from 'recharts';
 import type {ChartDataItem} from "../../types/components.ts";
 import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
 import {use} from "react";
 import {AccessibilityContext} from "../../AccessibilityProvider/AccessibilityContext.tsx";
+
+const BAR_COLOR = 'hsl(236, 43%, 47%)';
+const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
+const MAX_NAME_LENGTH = 40;
 
 interface Props {
     chartData: ChartDataItem[];
@@ -13,25 +14,24 @@ interface Props {
     setActiveIndex: (index: number) => void;
 }
 
-const BAR_COLOR = 'hsl(236, 43%, 47%)';
-const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
-const MAX_NAME_LENGTH = 40;
-
-export default function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
+export function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
     const accessibilityContext = use(AccessibilityContext);
-    const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
+
     if (chartData.length === 0)
         return (<div>No data to display.</div>);
 
-    const formatNameInXAxis = (name: string) =>
-        name.length > MAX_NAME_LENGTH ? name.slice(0, MAX_NAME_LENGTH) + "..." : name;
+    const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
+
+    const formatNameInXAxis = (name: string) => name.length > MAX_NAME_LENGTH ? name.slice(0, MAX_NAME_LENGTH) + "..." : name;
 
     return (
         <figure>
             <BarChart
-                style={{ width: '100%',
+                style={{
+                    width: '100%',
                     maxHeight: '70vh',
-                    aspectRatio: 1, paddingRight: '1rem' }}
+                    aspectRatio: 1, paddingRight: '1rem'
+                }}
                 responsive
                 margin={{
                     top: 5,
@@ -45,9 +45,10 @@ export default function CategoryChart({chartData, activeIndex, setActiveIndex}: 
                     angle={-90}
                     textAnchor="end"
                     tickFormatter={formatNameInXAxis}
-                    height={300} />
-                <YAxis />
-                <Tooltip />
+                    height={300}
+                />
+                <YAxis/>
+                <Tooltip/>
                 <Bar
                     isAnimationActive={!isMotionReduced}
                     dataKey="value"
@@ -69,3 +70,5 @@ export default function CategoryChart({chartData, activeIndex, setActiveIndex}: 
         </figure>
     );
 }
+
+export default CategoryChart;

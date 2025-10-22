@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import {fetchQuestions} from "../../api/trivia.ts";
 import styles from "./Dashboard.module.css";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {useGetCategoryData} from "../../hooks/useGetCategoryData.ts";
 import CategoryChart from "../CategoryChart/CategoryChart.tsx";
 import CategorySelection from "../CategorySelection/CategorySelection.tsx";
@@ -38,11 +38,14 @@ export function Dashboard() {
         setActiveCategory(nextActiveCategory);
     }
 
-    const setActiveCategoryByIndex = (index: number) =>
-        setActiveCategory({index, name:  categoryChartData[index].name});
+    const setActiveCategoryByIndex = useCallback(
+        (index: number) => setActiveCategory({index, name:  categoryChartData[index].name}),
+        [categoryChartData]
+    );
 
     if (isLoading) return (<LoadingPage/>);
-    if (error && data === undefined) return (<div>Error: {error.message}</div>);
+    if (error && data === undefined) return (<div role={'alert'}>Error: {error.message}</div>);
+    if (data?.length === 0) return (<div>No data.</div>);
 
     return (
         <div className={styles.grid}>
