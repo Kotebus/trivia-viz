@@ -4,14 +4,14 @@ import type {ChartDataItem} from "../../types/components.ts";
 
 
 const COLORS = {
-    easy: 'rgb(70, 140, 20)',
-    medium: 'rgb(255,167,52)',
-    hard: 'rgb(239, 67, 67)',
+    easy: 'hsl(95, 75%, 31%)',
+    medium: 'hsl(35,96%,56%)',
+    hard: 'hsl(0,86%,55%)',
 };
 const COLORS_CONTRAST = {
-    easy: '#1379CE',
-    medium: '#047C62',
-    hard: '#C20020',
+    easy: 'hsl(207, 83%, 44%)',
+    medium: 'hsl(167, 94%, 25%)',
+    hard: 'hsl(350, 100%, 38%)',
 };
 
 interface DifficultyChartProps {

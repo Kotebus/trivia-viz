@@ -12,8 +12,8 @@ interface Props {
     selectCategory: (category: string) => void;
 }
 
-const BAR_COLOR = '#444BAA';
-const ACTIVE_BAR_COLOR = '#E21A75';
+const BAR_COLOR = 'hsl(236, 43%, 47%)';
+const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
 
 export default function CategoryChart({chartData, selectCategory, activeIndex, setActiveIndex}: Props) {
     const handleBarSelect = (index: number) => {

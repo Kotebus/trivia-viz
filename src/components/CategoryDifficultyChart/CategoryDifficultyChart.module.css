@@ -9,5 +9,5 @@ figcaption .category {
 
 figcaption .count {
     font-size: 1.02rem ;
-    color: #666;
+    color: hsl(0, 0%, 30%);
 }
