@@ -47,8 +47,11 @@ export function Dashboard() {
     if (isLoading)
         return (<LoadingPage/>);
 
+    const errorMessage = error ?
+        <FetchErrorMessage><p>{error.message}</p></FetchErrorMessage> : null;
+
     if (error && data === undefined)
-        return (<FetchErrorMessage message={error.message}/>);
+        return errorMessage;
 
     if (data?.length === 0)
         return (<div>No data.</div>);
@@ -62,7 +65,7 @@ export function Dashboard() {
                     selectCategory={handleSelectCategory}
                 />
             </div>
-            {error && (<FetchErrorMessage message={error.message}/>)}
+            {errorMessage}
             <main>
                 <CategoryChart
                     chartData={categoryChartData}
