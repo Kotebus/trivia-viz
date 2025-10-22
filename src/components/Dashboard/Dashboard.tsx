@@ -9,6 +9,7 @@ import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficul
 import LoadingPage from "../LoadingPage/LoadingPage.tsx";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
+import FetchErrorMessage from "../FetchErrorMessage/FetchErrorMessage.tsx";
 
 interface ActiveCategory {
     name: string;
@@ -43,9 +44,14 @@ export function Dashboard() {
         [categoryChartData]
     );
 
-    if (isLoading) return (<LoadingPage/>);
-    if (error && data === undefined) return (<div role={'alert'}>Error: {error.message}</div>);
-    if (data?.length === 0) return (<div>No data.</div>);
+    if (isLoading)
+        return (<LoadingPage/>);
+
+    if (error && data === undefined)
+        return (<FetchErrorMessage message={error.message}/>);
+
+    if (data?.length === 0)
+        return (<div>No data.</div>);
 
     return (
         <div className={styles.grid}>
@@ -56,7 +62,7 @@ export function Dashboard() {
                     selectCategory={handleSelectCategory}
                 />
             </div>
-            {error && (<div className={styles.error}>Error: {error.message}</div>)}
+            {error && (<FetchErrorMessage message={error.message}/>)}
             <main>
                 <CategoryChart
                     chartData={categoryChartData}
