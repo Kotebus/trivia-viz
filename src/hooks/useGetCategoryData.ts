@@ -2,6 +2,27 @@ import {type Question} from "../types/trivia.ts";
 import {useMemo} from "react";
 import type {ChartDataItem} from "../types/components.ts";
 
+/**
+ * Hook for aggregating question data by categories for chart display.
+ *
+ * Counts the number of questions in each category and returns a sorted
+ * array of data ready for visualization.
+ *
+ * @param data - Array of questions to process.
+ * @returns Array of ChartDataItem objects with name (category name) and value (question count) fields,
+ *          sorted in descending order by question count
+ *
+ * @example
+ * ```TypeScript
+ * const questions = [
+ *   { category: 'Science', ... },
+ *   { category: 'History', ... },
+ *   { category: 'Science', ... }
+ * ];
+ * const chartData = useGetCategoryData(questions);
+ * // Result: [{ name: 'Science', value: 2 }, { name: 'History', value: 1 }]
+ * ```
+ */
 export const useGetCategoryData = (data: Question[] | undefined): ChartDataItem[] => {
     return useMemo(() => {
         if (!data || data.length === 0) return [];

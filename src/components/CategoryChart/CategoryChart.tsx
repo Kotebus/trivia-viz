@@ -1,12 +1,26 @@
 import {Tooltip, BarChart, YAxis, XAxis, Bar, Cell} from 'recharts';
 import type {ChartDataItem} from "../../types/components.ts";
 import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
-import {use} from "react";
+import {type CSSProperties, use} from "react";
 import {AccessibilityContext} from "../../AccessibilityProvider/AccessibilityContext.tsx";
+import type {Margin} from "recharts/types/util/types";
 
 const BAR_COLOR = 'hsl(236, 43%, 47%)';
 const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
 const MAX_NAME_LENGTH = 40;
+
+const BAR_CHART_STYLE: CSSProperties = {
+    width: '100%',
+    maxHeight: '70vh',
+    aspectRatio: 1,
+};
+
+const BAR_CHART_MARGIN_DATA: Partial<Margin> = {
+    top: 5,
+    right: 5,
+    left: 0,
+    bottom: 5,
+};
 
 interface Props {
     chartData: ChartDataItem[];
@@ -27,18 +41,9 @@ export function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
     return (
         <figure>
             <BarChart
-                style={{
-                    width: '100%',
-                    maxHeight: '70vh',
-                    aspectRatio: 1, paddingRight: '1rem'
-                }}
-                responsive
-                margin={{
-                    top: 5,
-                    right: 5,
-                    left: 0,
-                    bottom: 5,
-                }}
+                responsive={true}
+                style={BAR_CHART_STYLE}
+                margin={BAR_CHART_MARGIN_DATA}
                 data={chartData}>
                 <XAxis
                     dataKey="name"
@@ -52,7 +57,6 @@ export function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
                 <Bar
                     isAnimationActive={!isMotionReduced}
                     dataKey="value"
-
                     onClick={(_, index) => setActiveIndex(index)}
                 >
                     {chartData.map((entry, index) => (

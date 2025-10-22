@@ -2,22 +2,26 @@ import {type Difficulty, type Question} from "../types/trivia.ts";
 import {useMemo} from "react";
 import type {ChartDataItem} from "../types/components.ts";
 
-// export const useGetDifficultyData = (data: Question[] | undefined) => {
-//     return  useMemo(() => {
-//         if (!data || data.length === 0) return [];
-//
-//         const map = new Map<Difficulty, number>();
-//
-//         data.forEach((q) =>
-//             map.set(q.difficulty, (map.get(q.difficulty) || 0) + 1)
-//         );
-//
-//         return Array.from(map.entries())
-//             .map(([name, value]) =>
-//                 ({ name, value }));
-//     }, [data]);
-// }
-
+/**
+ * Transforms data with questions into a chart-ready format grouped by difficulty level.
+ *
+ * This hook aggregates questions by their difficulty (easy, medium, hard) and returns
+ * the data formatted for chart visualization components.
+ *
+ * @param data - Array of questions data or undefined
+ * @returns Array of chart data items with difficulty names and their corresponding counts.
+ *
+ * @example
+ * ```tsx
+ * const questions = [
+ *   { difficulty: 'easy', ... },
+ *   { difficulty: 'easy', ... },
+ *   { difficulty: 'hard', ... }
+ * ];
+ * const chartData = useGetDifficultyData(questions);
+ * // Returns: [{ name: 'easy', value: 2 }, { name: 'hard', value: 1 }]
+ * ```
+ */
 export const useGetDifficultyData = (data: Question[] | undefined): ChartDataItem[] => {
     return useMemo(() => {
         if (!data || data.length === 0) return [];

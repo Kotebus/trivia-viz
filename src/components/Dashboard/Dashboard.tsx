@@ -7,7 +7,7 @@ import CategoryChart from "../CategoryChart/CategoryChart.tsx";
 import CategorySelection from "../CategorySelection/CategorySelection.tsx";
 import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
 import LoadingPage from "../LoadingPage/LoadingPage.tsx";
-import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY} from "../../api/constants.ts";
+import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
 
 interface ActiveCategory {
@@ -17,8 +17,8 @@ interface ActiveCategory {
 
 export function Dashboard() {
     const { data, isLoading, error } = useSWR(
-        [QUESTIONS_REQUEST_KEY],
-        () => fetchQuestions(QUESTIONS_AMOUNT)
+        [API_CONFIG.QUESTIONS_REQUEST_KEY],
+        () => fetchQuestions(API_CONFIG.QUESTIONS_AMOUNT)
     );
     const questions = useHtmlDecodedCategoriesData(data);
 
