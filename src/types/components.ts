@@ -1,1 +1,4 @@
-export type ChartDataItem = { name: string; value: number };
+export type ChartDataItem = {
+    name: string;
+    value: number
+};

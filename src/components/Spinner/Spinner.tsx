@@ -1,30 +1,23 @@
-import type {CSSProperties} from 'react';
 import { Loader } from 'react-feather';
 
 import styles from './Spinner.module.css';
 
-interface SpinnerProps {
-    color?: string;
-    size?: number;
-    opacity?: number;
-}
-function Spinner({
-  color = 'black',
-  size = 24,
-  opacity = 0.5,
-}: SpinnerProps) {
-  return (
-    <span
-      className={styles.wrapper}
-      style={{
-        opacity,
-        width: size,
-        height: size,
-      } as CSSProperties}
-    >
-      <Loader color={color} size={size} />
+const SPINNER_SIZE = 24;
+
+function Spinner() {
+    return (
+        <span
+            className={styles.wrapper}
+            role="status"
+            aria-label="Loading"
+            style={{
+                width: SPINNER_SIZE,
+                height: SPINNER_SIZE,
+            }}
+        >
+      <Loader color='black' size={SPINNER_SIZE} aria-hidden="true"/>
     </span>
-  );
+    );
 }
 
 export default Spinner;

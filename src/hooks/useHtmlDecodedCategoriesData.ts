@@ -3,7 +3,9 @@ import { decode } from "he";
 
 import type {Question} from "../types/trivia.ts";
 
-export const  useDataHtmlCleaner = (data: Question[] | undefined) => {
+export const  useHtmlDecodedCategoriesData =
+    (data: Question[] | undefined): Question[] => {
+
     return useMemo(() => {
         if (!data || data.length === 0) return [];
 

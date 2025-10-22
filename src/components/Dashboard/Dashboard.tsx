@@ -8,7 +8,7 @@ import CategorySelection from "../CategorySelection/CategorySelection.tsx";
 import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
 import LoadingPage from "../LoadingPage/LoadingPage.tsx";
 import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY} from "../../api/constants.ts";
-import {useDataHtmlCleaner} from "../../hooks/useDataHtmlCleaner.ts";
+import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
 
 interface ActiveCategory {
     name: string;
@@ -20,7 +20,7 @@ export function Dashboard() {
         [QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(QUESTIONS_AMOUNT)
     );
-    const questions = useDataHtmlCleaner(data);
+    const questions = useHtmlDecodedCategoriesData(data);
 
     const categoryChartData = useGetCategoryData(questions);
     const categoriesNames = categoryChartData.map(x => x.name);

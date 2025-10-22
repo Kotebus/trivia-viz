@@ -20,7 +20,7 @@ const hiddenStyles : CSSProperties = {
     border: 0,
 };
 
-interface VisuallyHiddenProps extends PropsWithChildren{
+interface VisuallyHiddenProps extends PropsWithChildren {
     ariaLive?: AriaAttributes['aria-live'];
 }
 
