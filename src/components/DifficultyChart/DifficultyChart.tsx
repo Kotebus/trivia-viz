@@ -2,7 +2,7 @@ import {type Difficulty} from "../../types/trivia.ts";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 import type {ChartDataItem} from "../../types/components.ts";
 import {use} from "react";
-import {AccessibilityContext} from "../../AccessibilityProvider/AccessibilityContext.tsx";
+import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 
 const CHART_HEIGHT = 250;
 const PIE_CHART_OUTER_RADIUS = 80;

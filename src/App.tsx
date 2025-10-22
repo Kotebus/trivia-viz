@@ -1,6 +1,6 @@
 import { SWRConfig } from "swr";
 import {Dashboard} from "./components/Dashboard/Dashboard.tsx";
-import AccessibilityProvider from "./AccessibilityProvider/AccessibilityProvider.tsx";
+import AccessibilityProvider from "./providers/AccessibilityProvider/AccessibilityProvider.tsx";
 import {API_CONFIG} from "./api/ApiConfig.ts";
 
 function App() {
