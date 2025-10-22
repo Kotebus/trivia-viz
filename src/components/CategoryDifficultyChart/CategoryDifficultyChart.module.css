@@ -15,6 +15,6 @@ figcaption .count {
 .empty {
     color: hsl(0, 0%, 40%);
     font-size: 0.95rem;
-    margin-top: 0.5rem;
+    margin-top: 8px;
     font-style: italic;
 }
