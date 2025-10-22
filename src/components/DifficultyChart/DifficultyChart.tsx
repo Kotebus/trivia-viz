@@ -8,15 +8,17 @@ const CHART_HEIGHT = 250;
 const PIE_CHART_OUTER_RADIUS = 80;
 
 const COLORS = {
-    easy: 'hsl(95, 75%, 31%)',
-    medium: 'hsl(35,96%,56%)',
-    hard: 'hsl(0,86%,55%)',
-};
-const COLORS_CONTRAST = {
-    easy: 'hsl(207, 83%, 44%)',
-    medium: 'hsl(167, 94%, 25%)',
-    hard: 'hsl(350, 100%, 38%)',
-};
+    regular: {
+        easy: 'hsl(95, 75%, 31%)',
+        medium: 'hsl(35,96%,56%)',
+        hard: 'hsl(0,86%,55%)',
+    },
+    contrast: {
+        easy: 'hsl(207, 83%, 44%)',
+        medium: 'hsl(167, 94%, 25%)',
+        hard: 'hsl(350, 100%, 38%)',
+    },
+}
 
 interface DifficultyChartProps {
     chartData: ChartDataItem[];
@@ -30,7 +32,7 @@ function DifficultyChart({chartData}:DifficultyChartProps) {
 
     if (chartData.length === 0) return null;
 
-    const colors = isContrastMode ? COLORS_CONTRAST : COLORS;
+    const colors = isContrastMode ? COLORS.contrast : COLORS.regular;
     return (
             <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
                 <PieChart>
@@ -44,8 +46,10 @@ function DifficultyChart({chartData}:DifficultyChartProps) {
                         outerRadius={PIE_CHART_OUTER_RADIUS}
                     >
                         {chartData.map((entry) => (
-                            <Cell key={entry.name}
-                                  fill={colors[entry.name as Difficulty]} />
+                            <Cell
+                                key={entry.name}
+                                  fill={colors[entry.name as Difficulty]}
+                            />
                         ))}
                     </Pie>
                     <Tooltip />
