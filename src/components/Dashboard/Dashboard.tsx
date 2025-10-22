@@ -7,7 +7,7 @@ import CategoryChart from "../CategoryChart/CategoryChart.tsx";
 import CategorySelection from "../CategorySelection/CategorySelection.tsx";
 import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
 import LoadingPage from "../LoadingPage/LoadingPage.tsx";
-import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY, REFRESH_INTERVAL} from "../../api/constants.ts";
+import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY} from "../../api/constants.ts";
 import {useDataHtmlCleaner} from "../../hooks/useDataHtmlCleaner.ts";
 
 interface ActiveCategory {
@@ -18,8 +18,7 @@ interface ActiveCategory {
 export function Dashboard() {
     const { data, isLoading, error } = useSWR(
         [QUESTIONS_REQUEST_KEY],
-        () => fetchQuestions(QUESTIONS_AMOUNT),
-        { refreshInterval: REFRESH_INTERVAL }
+        () => fetchQuestions(QUESTIONS_AMOUNT)
     );
     const questions = useDataHtmlCleaner(data);
 
