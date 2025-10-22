@@ -12,19 +12,12 @@ interface CategoryDifficultyChartProps {
 }
 
 export const CategoryDifficultyChart =
-    ({category, data, allCategoriesLabel}: CategoryDifficultyChartProps) => {
+    ({category, data = [], allCategoriesLabel}: CategoryDifficultyChartProps) => {
 
-        const filteredData = useMemo(() => {
-            if (!data) {
-                return [];
-            }
-
-            if (!category) {
-                return data;
-            }
-
-            return data.filter(x => x.category === category);
-        }, [data, category]);
+        const filteredData = useMemo(
+            () => category ? data.filter(x => x.category === category) : data,
+            [data, category]
+        );
 
         const categoryChartData = useGetDifficultyData(filteredData);
         const categoryName = category ?? allCategoriesLabel;
@@ -37,7 +30,10 @@ export const CategoryDifficultyChart =
         }
 
         return (
-            <figure aria-label={`${categoryName} difficulty distribution`}>
+            <figure
+                className={style.chart}
+                aria-label={`${categoryName} difficulty distribution`}
+            >
                 <figcaption>
                     <VisuallyHidden>Distribution by difficulty level</VisuallyHidden>
                     <span className={style.category}>{categoryName}</span>

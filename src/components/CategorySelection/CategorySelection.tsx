@@ -1,4 +1,4 @@
-import {type ChangeEvent, useId, useMemo} from "react";
+import {type ChangeEvent, useId} from "react";
 
 interface CategorySelectionProps {
     categoriesList: string[];
@@ -20,15 +20,6 @@ export const CategorySelection = (
         selectCategory(nextCategory);
     }
 
-    const categoryOptionsList = useMemo(
-        () => categoriesList?.map(category => (
-            <option value={category} key={category}>
-                {category}
-            </option>
-        )),
-        [categoriesList]
-    );
-
     return (
         <>
             <label htmlFor={selectionId}>
@@ -43,7 +34,11 @@ export const CategorySelection = (
                 <option value={ALL_CATEGORY_VALUE}>
                     All
                 </option>
-                {categoryOptionsList}
+                {categoriesList?.map(category => (
+                    <option value={category} key={category}>
+                        {category}
+                    </option>
+                ))}
             </select>
         </>
     );

@@ -55,8 +55,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
         return (<LoadingPage/>);
     }
 
-    const errorMessage = error ?
-        <FetchErrorMessage><p>{error.message}</p></FetchErrorMessage> : null;
+    const errorMessage = error ? <FetchErrorMessage message={error.message}/> : null;
 
     if (error && data === undefined) {
         return errorMessage;
@@ -67,7 +66,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
     }
 
     return (
-        <div className={styles.grid}>
+        <div className={styles.dashboard}>
             {errorMessage}
             {data !== undefined && (
                 <>
@@ -78,7 +77,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
                             selectCategory={handleSelectCategory}
                         />
                     </div>
-                    <main>
+                    <main className={styles.main}>
                         <CategoryChart
                             chartData={categoryChartData}
                             activeIndex={activeCategory?.index}
@@ -86,7 +85,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
                         />
                     </main>
 
-                    <aside>
+                    <aside className={styles.sidebar}>
                         <CategoryDifficultyChart
                             allCategoriesLabel={allDataLabel}
                             data={questions}

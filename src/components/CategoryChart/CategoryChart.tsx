@@ -5,6 +5,7 @@ import type {Margin} from "recharts/types/util/types";
 import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 import type {ChartDataItem} from "../../types/ChartDataItem.ts";
 import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
+import styles from "./CategoryChart.module.css"
 
 const BAR_COLOR = 'hsl(236, 43%, 47%)';
 const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
@@ -47,7 +48,7 @@ export const CategoryChart = ({chartData, activeIndex, setActiveIndex}: Props) =
 
 
     return (
-        <figure>
+        <figure className={styles.chart}>
             <BarChart
                 responsive={true}
                 style={BAR_CHART_STYLE}
