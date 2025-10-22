@@ -2,7 +2,6 @@ import {type Difficulty} from "../../types/trivia.ts";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 import type {ChartDataItem} from "../../types/components.ts";
 
-
 const COLORS = {
     easy: 'hsl(95, 75%, 31%)',
     medium: 'hsl(35,96%,56%)',
@@ -15,12 +14,14 @@ const COLORS_CONTRAST = {
 };
 
 interface DifficultyChartProps {
-    chartData: ChartDataItem[]
+    chartData: ChartDataItem[];
+    useContrastMode?: boolean;
 }
 
-function DifficultyChart({chartData}:DifficultyChartProps) {
-    const userPrefersHighContrast = window.matchMedia("(prefers-contrast: more)").matches;
-    const colors = userPrefersHighContrast ? COLORS_CONTRAST : COLORS;
+function DifficultyChart({chartData, useContrastMode = false}:DifficultyChartProps) {
+    if (chartData.length === 0) return;
+
+    const colors = useContrastMode ? COLORS_CONTRAST : COLORS;
     return (
             <ResponsiveContainer width="100%" height={250}>
                 <PieChart>

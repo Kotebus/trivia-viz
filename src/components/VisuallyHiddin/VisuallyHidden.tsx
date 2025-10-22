@@ -5,7 +5,7 @@
 // Adding “display: none” would hide the
 // element from ALL users, including those
 // using screen-readers.
-import type {CSSProperties, PropsWithChildren} from "react";
+import type {AriaAttributes, CSSProperties, PropsWithChildren} from "react";
 
 
 const hiddenStyles : CSSProperties = {
@@ -20,10 +20,13 @@ const hiddenStyles : CSSProperties = {
     border: 0,
 };
 
+interface VisuallyHiddenProps extends PropsWithChildren{
+    ariaLive?: AriaAttributes['aria-live'];
+}
 
-const VisuallyHidden = ({ children }: PropsWithChildren) => {
+const VisuallyHidden = ({ children, ariaLive }: VisuallyHiddenProps) => {
     return (
-        <span style={hiddenStyles}>
+        <span aria-live={ariaLive} style={hiddenStyles}>
            {children}
        </span>
     );

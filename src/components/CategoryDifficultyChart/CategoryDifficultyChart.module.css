@@ -11,3 +11,10 @@ figcaption .count {
     font-size: 1.02rem ;
     color: hsl(0, 0%, 30%);
 }
+
+.empty {
+    color: hsl(0, 0%, 40%);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}

@@ -1,4 +1,5 @@
 import {type ChangeEvent, useId} from "react";
+import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
 
 interface CategorySelectionProps {
     categoriesList: string[];
@@ -8,7 +9,7 @@ interface CategorySelectionProps {
 
 const ALL_CATEGORY_VALUE = 'all';
 
-function CategorySelection({categoriesList, activeCategoryName, selectCategory} : CategorySelectionProps) {
+function CategorySelection({categoriesList, activeCategoryName = ALL_CATEGORY_VALUE, selectCategory} : CategorySelectionProps) {
     const selectionId = "category-select-" + useId();
 
     const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -37,6 +38,9 @@ function CategorySelection({categoriesList, activeCategoryName, selectCategory} 
                     </option>
                 ))}
             </select>
+            <VisuallyHidden ariaLive={'polite'}>
+                {activeCategoryName ? `Selected: ${activeCategoryName}` : "All categories selected"}
+            </VisuallyHidden>
         </>
     );
 }

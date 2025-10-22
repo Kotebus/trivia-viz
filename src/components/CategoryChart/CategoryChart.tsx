@@ -9,17 +9,18 @@ interface Props {
     chartData: ChartDataItem[];
     activeIndex?: number;
     setActiveIndex: (index: number) => void;
-    selectCategory: (category: string) => void;
 }
 
 const BAR_COLOR = 'hsl(236, 43%, 47%)';
 const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
+const MAX_NAME_LENGTH = 40;
 
-export default function CategoryChart({chartData, selectCategory, activeIndex, setActiveIndex}: Props) {
-    const handleBarSelect = (index: number) => {
-        setActiveIndex(index);
-        selectCategory(chartData[index].name);
-    }
+export default function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
+    if (chartData.length === 0)
+        return (<div>No data to display.</div>);
+
+    const formatNameInXAxis = (name: string) =>
+        name.length > MAX_NAME_LENGTH ? name.slice(0, MAX_NAME_LENGTH) + "..." : name;
 
     return (
         <figure>
@@ -35,19 +36,24 @@ export default function CategoryChart({chartData, selectCategory, activeIndex, s
                     bottom: 5,
                 }}
                 data={chartData}>
-                <XAxis dataKey="name" angle={-90} textAnchor="end" height={300} />
+                <XAxis
+                    dataKey="name"
+                    angle={-90}
+                    textAnchor="end"
+                    tickFormatter={formatNameInXAxis}
+                    height={300} />
                 <YAxis />
                 <Tooltip />
                 <Bar
                     dataKey="value"
 
-                    onClick={(_, index) => handleBarSelect(index)}
+                    onClick={(_, index) => setActiveIndex(index)}
                 >
-                    {chartData.map((_entry, index) => (
+                    {chartData.map((entry, index) => (
                         <Cell
                             cursor="pointer"
                             fill={index === activeIndex ? ACTIVE_BAR_COLOR : BAR_COLOR}
-                            key={`cell-${index}`}
+                            key={`cell-${entry.name}`}
                         />
                     ))}
                 </Bar>

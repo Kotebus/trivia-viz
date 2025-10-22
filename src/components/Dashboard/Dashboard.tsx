@@ -1,14 +1,20 @@
 import useSWR from "swr";
 import {fetchQuestions} from "../../api/trivia.ts";
 import styles from "./Dashboard.module.css";
-import {type Question} from "../../types/trivia.ts";
 import {useState} from "react";
 import {useGetCategoryData} from "../../hooks/useGetCategoryData.ts";
 import CategoryChart from "../CategoryChart/CategoryChart.tsx";
 import CategorySelection from "../CategorySelection/CategorySelection.tsx";
 import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
-import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY, REFRESH_INTERVAL} from "../../configuration/constants.ts";
 import LoadingPage from "../LoadingPage/LoadingPage.tsx";
+import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY, REFRESH_INTERVAL} from "../../api/constants.ts";
+import {useContrastMode} from "../../hooks/useContrastMode.ts";
+import {useDataHtmlCleaner} from "../../hooks/useDataHtmlCleaner.ts";
+
+interface ActiveCategory {
+    name: string;
+    index: number;
+}
 
 export function Dashboard() {
     const { data, isLoading, error } = useSWR(
@@ -16,22 +22,26 @@ export function Dashboard() {
         () => fetchQuestions(QUESTIONS_AMOUNT),
         { refreshInterval: REFRESH_INTERVAL }
     );
+    const userPrefersHighContrast = useContrastMode();
 
-    const questions = data?.map(item => ({
-        ...item,
-        category: item.category.replace("&amp;", "&"),
-    } as Question)) ?? [];
+    const questions = useDataHtmlCleaner(data);
 
     const categoryChartData = useGetCategoryData(questions);
     const categories = categoryChartData.map(x => x.name);
 
-    const [activeCategoryName, setActiveCategoryName] = useState<string | undefined>(undefined);
-    const [activeCategoryIndex, setActiveCategoryIndex] = useState<number | undefined>(undefined);
+    const [activeCategory, setActiveCategory] = useState<ActiveCategory | undefined>(undefined);
 
     const handleSelectCategory = (categoryName?: string) => {
-        setActiveCategoryName(categoryName);
-        setActiveCategoryIndex(categoryChartData.findIndex(x => x.name === categoryName));
+        if (!categoryName) {
+            setActiveCategory(undefined);
+            return;
+        }
+
+        setActiveCategory({name: categoryName, index: categoryChartData.findIndex(x => x.name === categoryName)});
     }
+
+    const setActiveCategoryIndex = (index: number) =>
+        setActiveCategory({index, name:  categoryChartData[index].name});
 
     if (isLoading) return (<LoadingPage/>);
     if (error && data === undefined) return (<div>Error: {error.message}</div>);
@@ -41,7 +51,7 @@ export function Dashboard() {
             <div className={styles.header}>
                 <CategorySelection
                     categoriesList={categories}
-                    activeCategoryName={activeCategoryName}
+                    activeCategoryName={activeCategory?.name}
                     selectCategory={handleSelectCategory}
                 />
             </div>
@@ -49,20 +59,21 @@ export function Dashboard() {
             <main>
                 <CategoryChart
                     chartData={categoryChartData}
-                    activeIndex={activeCategoryIndex}
+                    activeIndex={activeCategory?.index}
                     setActiveIndex={setActiveCategoryIndex}
-                    selectCategory={setActiveCategoryName}
                 />
             </main>
 
             <aside>
                 <CategoryDifficultyChart
+                    useContrastMode={userPrefersHighContrast}
                     data={questions}
                 />
 
-                {activeCategoryName && (
+                {activeCategory && (
                     <CategoryDifficultyChart
-                        category={activeCategoryName}
+                        useContrastMode={userPrefersHighContrast}
+                        category={activeCategory?.name}
                         data={questions}
                     />
                 )}
