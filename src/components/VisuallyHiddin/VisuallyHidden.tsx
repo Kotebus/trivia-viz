@@ -24,6 +24,23 @@ interface VisuallyHiddenProps extends PropsWithChildren {
     ariaLive?: AriaAttributes['aria-live'];
 }
 
+/**
+ * A component that hides content visually while keeping it accessible to screen readers.
+ *
+ * This is useful for providing additional context or information that is only relevant
+ * for users with assistive technologies.
+ *
+ * @param props - Component props
+ * @param props.children - Content to be visually hidden but accessible to screen readers
+ * @param props.ariaLive - Optional ARIA live region setting for dynamic content announcements
+ *
+ * @example
+ * ```tsx
+ * <VisuallyHidden>
+ *   Additional context for screen readers
+ * </VisuallyHidden>
+ * ```
+ */
 const VisuallyHidden = ({ children, ariaLive }: VisuallyHiddenProps) => {
     return (
         <span aria-live={ariaLive} style={hiddenStyles}>

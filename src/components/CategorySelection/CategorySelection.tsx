@@ -1,5 +1,4 @@
-import {type ChangeEvent, useId} from "react";
-import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {type ChangeEvent, useId, useMemo} from "react";
 
 interface CategorySelectionProps {
     categoriesList: string[];
@@ -9,7 +8,10 @@ interface CategorySelectionProps {
 
 const ALL_CATEGORY_VALUE = 'all';
 
-function CategorySelection({categoriesList, activeCategoryName = ALL_CATEGORY_VALUE, selectCategory} : CategorySelectionProps) {
+function CategorySelection(
+    {categoriesList, activeCategoryName = ALL_CATEGORY_VALUE, selectCategory} : CategorySelectionProps
+) {
+
     const selectionId = "category-select-" + useId();
 
     const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -17,6 +19,15 @@ function CategorySelection({categoriesList, activeCategoryName = ALL_CATEGORY_VA
         const nextCategory = selectedCategory === ALL_CATEGORY_VALUE ? undefined : selectedCategory;
         selectCategory(nextCategory);
     }
+
+    const categoryOptionsList = useMemo(
+        () => categoriesList?.map(category => (
+            <option value={category} key={category}>
+                {category}
+            </option>
+        )),
+        [categoriesList]
+    );
 
     return (
         <>
@@ -32,15 +43,8 @@ function CategorySelection({categoriesList, activeCategoryName = ALL_CATEGORY_VA
                 <option value={ALL_CATEGORY_VALUE}>
                     All
                 </option>
-                {categoriesList?.map(category => (
-                    <option value={category} key={category}>
-                        {category}
-                    </option>
-                ))}
+                {categoryOptionsList}
             </select>
-            <VisuallyHidden ariaLive={'polite'}>
-                {activeCategoryName ? `Selected: ${activeCategoryName}` : "All categories selected"}
-            </VisuallyHidden>
         </>
     );
 }

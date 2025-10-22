@@ -4,6 +4,9 @@ import type {ChartDataItem} from "../../types/components.ts";
 import {use} from "react";
 import {AccessibilityContext} from "../../AccessibilityProvider/AccessibilityContext.tsx";
 
+const CHART_HEIGHT = 250;
+const PIE_CHART_OUTER_RADIUS = 80;
+
 const COLORS = {
     easy: 'hsl(95, 75%, 31%)',
     medium: 'hsl(35,96%,56%)',
@@ -25,11 +28,11 @@ function DifficultyChart({chartData}:DifficultyChartProps) {
     const isContrastMode = accessibilityContext?.isHighContrast ?? false;
     const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
 
-    if (chartData.length === 0) return;
+    if (chartData.length === 0) return null;
 
     const colors = isContrastMode ? COLORS_CONTRAST : COLORS;
     return (
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
                 <PieChart>
                     <Pie
                         isAnimationActive={!isMotionReduced}
@@ -38,8 +41,7 @@ function DifficultyChart({chartData}:DifficultyChartProps) {
                         nameKey="name"
                         cx="50%"
                         cy="50%"
-                        outerRadius={80}
-                        label
+                        outerRadius={PIE_CHART_OUTER_RADIUS}
                     >
                         {chartData.map((entry) => (
                             <Cell key={entry.name}
