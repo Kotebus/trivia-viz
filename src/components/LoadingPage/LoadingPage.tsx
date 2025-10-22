@@ -1,5 +1,5 @@
 import {Spinner} from "../Spinner/Spinner.tsx";
-import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {VisuallyHidden} from "../VisuallyHidden/VisuallyHidden.tsx";
 import styles from "./LoadingPage.module.css";
 
 export const LoadingPage = () => {

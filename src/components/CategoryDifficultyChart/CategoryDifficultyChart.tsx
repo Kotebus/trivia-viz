@@ -2,7 +2,7 @@ import {useMemo} from "react";
 import {useGetDifficultyData} from "../../hooks/useGetDifficultyData.ts";
 import type {Question} from "../../types/trivia.ts";
 import {DifficultyChart} from "../DifficultyChart/DifficultyChart.tsx";
-import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {VisuallyHidden} from "../VisuallyHidden/VisuallyHidden.tsx";
 import style from "./CategoryDifficultyChart.module.css";
 
 interface CategoryDifficultyChartProps {

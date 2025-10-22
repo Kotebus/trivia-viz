@@ -4,7 +4,7 @@ import type {BarRectangleItem} from "recharts/types/cartesian/Bar";
 import type {Margin} from "recharts/types/util/types";
 import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 import type {ChartDataItem} from "../../types/ChartDataItem.ts";
-import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {VisuallyHidden} from "../VisuallyHidden/VisuallyHidden.tsx";
 import styles from "./CategoryChart.module.css"
 
 const BAR_COLOR = 'hsl(236, 43%, 47%)';

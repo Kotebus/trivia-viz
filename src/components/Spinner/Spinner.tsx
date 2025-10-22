@@ -1,5 +1,4 @@
 import {Loader} from 'react-feather';
-
 import styles from './Spinner.module.css';
 
 const SPINNER_SIZE = 24;

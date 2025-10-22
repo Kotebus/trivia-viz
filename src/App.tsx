@@ -1,6 +1,6 @@
 import {SWRConfig} from "swr";
 import {API_CONFIG} from "./api/ApiConfig.ts";
-import {type AppConfig, DefaultAppConfig} from "./AppConfig.ts";
+import {type AppConfig, defaultAppConfig} from "./AppConfig.ts";
 import {Dashboard} from "./components/Dashboard/Dashboard.tsx";
 import {Header} from "./components/Header/Header.tsx";
 import {AccessibilityProvider} from "./providers/AccessibilityProvider/AccessibilityProvider.tsx";
@@ -11,7 +11,7 @@ export interface AppProps {
     data?: Question[];
 }
 
-export const App = ({appConfig = DefaultAppConfig, data}: AppProps) => {
+export const App = ({appConfig = defaultAppConfig, data}: AppProps) => {
     return (
         <SWRConfig value={{
             revalidateOnFocus: false,

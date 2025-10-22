@@ -11,7 +11,7 @@ export interface HeaderConfig {
     subtitle?: string;
 }
 
-export const DefaultAppConfig: AppConfig = {
+export const defaultAppConfig: AppConfig = {
     header: {
         title: 'Trivia Analytics Dashboard',
         subtitle: 'Categories and difficulty statistics',
