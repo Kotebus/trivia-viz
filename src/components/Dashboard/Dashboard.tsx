@@ -8,7 +8,6 @@ import CategorySelection from "../CategorySelection/CategorySelection.tsx";
 import CategoryDifficultyChart from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
 import LoadingPage from "../LoadingPage/LoadingPage.tsx";
 import {QUESTIONS_AMOUNT, QUESTIONS_REQUEST_KEY, REFRESH_INTERVAL} from "../../api/constants.ts";
-import {useContrastMode} from "../../hooks/useContrastMode.ts";
 import {useDataHtmlCleaner} from "../../hooks/useDataHtmlCleaner.ts";
 
 interface ActiveCategory {
@@ -22,25 +21,25 @@ export function Dashboard() {
         () => fetchQuestions(QUESTIONS_AMOUNT),
         { refreshInterval: REFRESH_INTERVAL }
     );
-    const userPrefersHighContrast = useContrastMode();
-
     const questions = useDataHtmlCleaner(data);
 
     const categoryChartData = useGetCategoryData(questions);
-    const categories = categoryChartData.map(x => x.name);
+    const categoriesNames = categoryChartData.map(x => x.name);
 
     const [activeCategory, setActiveCategory] = useState<ActiveCategory | undefined>(undefined);
 
     const handleSelectCategory = (categoryName?: string) => {
-        if (!categoryName) {
-            setActiveCategory(undefined);
-            return;
-        }
+        const nextActiveCategory = categoryName ?
+            {
+                name: categoryName,
+                index: categoryChartData.findIndex(x => x.name === categoryName)
+            } :
+            undefined;
 
-        setActiveCategory({name: categoryName, index: categoryChartData.findIndex(x => x.name === categoryName)});
+        setActiveCategory(nextActiveCategory);
     }
 
-    const setActiveCategoryIndex = (index: number) =>
+    const setActiveCategoryByIndex = (index: number) =>
         setActiveCategory({index, name:  categoryChartData[index].name});
 
     if (isLoading) return (<LoadingPage/>);
@@ -50,7 +49,7 @@ export function Dashboard() {
         <div className={styles.grid}>
             <div className={styles.header}>
                 <CategorySelection
-                    categoriesList={categories}
+                    categoriesList={categoriesNames}
                     activeCategoryName={activeCategory?.name}
                     selectCategory={handleSelectCategory}
                 />
@@ -60,19 +59,17 @@ export function Dashboard() {
                 <CategoryChart
                     chartData={categoryChartData}
                     activeIndex={activeCategory?.index}
-                    setActiveIndex={setActiveCategoryIndex}
+                    setActiveIndex={setActiveCategoryByIndex}
                 />
             </main>
 
             <aside>
                 <CategoryDifficultyChart
-                    useContrastMode={userPrefersHighContrast}
                     data={questions}
                 />
 
                 {activeCategory && (
                     <CategoryDifficultyChart
-                        useContrastMode={userPrefersHighContrast}
                         category={activeCategory?.name}
                         data={questions}
                     />

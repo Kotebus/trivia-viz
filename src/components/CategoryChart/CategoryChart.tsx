@@ -4,6 +4,7 @@ import {
 } from 'recharts';
 import type {ChartDataItem} from "../../types/components.ts";
 import VisuallyHidden from "../VisuallyHiddin/VisuallyHidden.tsx";
+import {useReduceMotionMode} from "../../hooks/useReduceMotionMode.ts";
 
 interface Props {
     chartData: ChartDataItem[];
@@ -16,6 +17,7 @@ const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
 const MAX_NAME_LENGTH = 40;
 
 export default function CategoryChart({chartData, activeIndex, setActiveIndex}: Props) {
+    const isMotionReduced = useReduceMotionMode();
     if (chartData.length === 0)
         return (<div>No data to display.</div>);
 
@@ -45,6 +47,7 @@ export default function CategoryChart({chartData, activeIndex, setActiveIndex}: 
                 <YAxis />
                 <Tooltip />
                 <Bar
+                    isAnimationActive={!isMotionReduced}
                     dataKey="value"
 
                     onClick={(_, index) => setActiveIndex(index)}

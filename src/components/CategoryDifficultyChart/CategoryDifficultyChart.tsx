@@ -7,10 +7,9 @@ import {useMemo} from "react";
 interface CategoryDifficultyChartProps {
     category?: string;
     data: Question[] | undefined;
-    useContrastMode?: boolean;
 }
 
-const CategoryDifficultyChart = ({category, data, useContrastMode = false}:CategoryDifficultyChartProps) => {
+const CategoryDifficultyChart = ({category, data}:CategoryDifficultyChartProps) => {
     const filteredData = useMemo(() => {
         if (!data) return [];
         if (!category) return data;
@@ -29,7 +28,7 @@ const CategoryDifficultyChart = ({category, data, useContrastMode = false}:Categ
                 <span className={style.category}>{categoryName}</span>
                 <span className={style.count}>Total: {filteredData?.length}</span>
             </figcaption>
-            <DifficultyChart useContrastMode={useContrastMode} chartData={categoryChartData}/>
+            <DifficultyChart chartData={categoryChartData}/>
         </figure>
     );
 }

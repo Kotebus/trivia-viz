@@ -1,6 +1,8 @@
 import {type Difficulty} from "../../types/trivia.ts";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 import type {ChartDataItem} from "../../types/components.ts";
+import {useReduceMotionMode} from "../../hooks/useReduceMotionMode.ts";
+import {useContrastMode} from "../../hooks/useContrastMode.ts";
 
 const COLORS = {
     easy: 'hsl(95, 75%, 31%)',
@@ -15,17 +17,20 @@ const COLORS_CONTRAST = {
 
 interface DifficultyChartProps {
     chartData: ChartDataItem[];
-    useContrastMode?: boolean;
 }
 
-function DifficultyChart({chartData, useContrastMode = false}:DifficultyChartProps) {
+function DifficultyChart({chartData}:DifficultyChartProps) {
+    const isContrastMode = useContrastMode();
+    const isMotionReduced = useReduceMotionMode();
+
     if (chartData.length === 0) return;
 
-    const colors = useContrastMode ? COLORS_CONTRAST : COLORS;
+    const colors = isContrastMode ? COLORS_CONTRAST : COLORS;
     return (
             <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
                     <Pie
+                        isAnimationActive={!isMotionReduced}
                         data={chartData}
                         dataKey="value"
                         nameKey="name"
