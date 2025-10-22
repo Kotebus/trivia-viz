@@ -7,16 +7,16 @@ export interface IAccessibilityProvider {
 }
 
 const checkMediaQuery = (query: string) =>
-     (typeof window !== "undefined" &&
+    (typeof window !== "undefined" &&
         window.matchMedia &&
         window.matchMedia(query).matches);
 
-export const AccessibilityProvider = ({ children }:PropsWithChildren) => {
+export const AccessibilityProvider = ({children}: PropsWithChildren) => {
     const isHighContrast = checkMediaQuery("(prefers-contrast: more)");
     const isMotionReduced = checkMediaQuery("(prefers-reduced-motion: reduce)");
 
     return (
-        <AccessibilityContext value={{ isHighContrast, isMotionReduced}}>
+        <AccessibilityContext value={{isHighContrast, isMotionReduced}}>
             {children}
         </AccessibilityContext>
     );

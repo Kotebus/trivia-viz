@@ -1,5 +1,5 @@
+import {decode} from "he";
 import {useMemo} from "react";
-import { decode } from "he";
 
 import type {Question} from "../types/trivia.ts";
 
@@ -16,17 +16,17 @@ import type {Question} from "../types/trivia.ts";
  * // Output: [{ category: "Entertainment: & Music", ... }]
  * ```
  */
-export const  useHtmlDecodedCategoriesData =
+export const useHtmlDecodedCategoriesData =
     (data: Question[] | undefined): Question[] => {
 
-    return useMemo(() => {
-        if (!data || data.length === 0) {
-            return [];
-        }
+        return useMemo(() => {
+            if (!data || data.length === 0) {
+                return [];
+            }
 
-        return data.map(item => ({
-            ...item,
-            category: decode(item.category),
-        }));
-    }, [data]);
-}
+            return data.map(item => ({
+                ...item,
+                category: decode(item.category),
+            }));
+        }, [data]);
+    }

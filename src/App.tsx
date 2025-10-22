@@ -1,15 +1,16 @@
-import { SWRConfig } from "swr";
-import {Dashboard} from "./components/Dashboard/Dashboard.tsx";
-import {AccessibilityProvider} from "./providers/AccessibilityProvider/AccessibilityProvider.tsx";
+import {SWRConfig} from "swr";
 import {API_CONFIG} from "./api/ApiConfig.ts";
-import {Header} from "./components/Header/Header.tsx";
 import {type AppConfig, DefaultAppConfig} from "./AppConfig.ts";
+import {Dashboard} from "./components/Dashboard/Dashboard.tsx";
+import {Header} from "./components/Header/Header.tsx";
+import {AccessibilityProvider} from "./providers/AccessibilityProvider/AccessibilityProvider.tsx";
 import type {Question} from "./types/trivia.ts";
 
 export interface AppProps {
     appConfig?: AppConfig;
     data?: Question[];
 }
+
 export function App({appConfig = DefaultAppConfig, data}: AppProps) {
     return (
         <SWRConfig value={{

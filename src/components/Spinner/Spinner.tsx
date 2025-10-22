@@ -1,4 +1,4 @@
-import { Loader } from 'react-feather';
+import {Loader} from 'react-feather';
 
 import styles from './Spinner.module.css';
 

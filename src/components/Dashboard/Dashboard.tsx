@@ -1,15 +1,15 @@
 import {useCallback, useState} from "react";
 import useSWR from "swr";
+import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/trivia.ts";
 import {useGetCategoryData} from "../../hooks/useGetCategoryData.ts";
-import {CategoryChart} from "../CategoryChart/CategoryChart.tsx";
-import {CategorySelection} from "../CategorySelection/CategorySelection.tsx";
-import {CategoryDifficultyChart} from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
-import {LoadingPage} from "../LoadingPage/LoadingPage.tsx";
-import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
-import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
 import type {Question} from "../../types/trivia.ts";
+import {CategoryChart} from "../CategoryChart/CategoryChart.tsx";
+import {CategoryDifficultyChart} from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
+import {CategorySelection} from "../CategorySelection/CategorySelection.tsx";
+import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
+import {LoadingPage} from "../LoadingPage/LoadingPage.tsx";
 import styles from "./Dashboard.module.css";
 
 interface ActiveCategory {
@@ -24,7 +24,7 @@ interface DashboardProps {
 }
 
 export function Dashboard({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) {
-    const { data, isLoading, error } = useSWR(
+    const {data, isLoading, error} = useSWR(
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(sourceData ? 0 : fetchDataAmount)
     );
@@ -47,7 +47,7 @@ export function Dashboard({fetchDataAmount, allDataLabel, sourceData}: Dashboard
     }
 
     const setActiveCategoryByIndex = useCallback(
-        (index: number) => setActiveCategory({index, name:  categoryChartData[index].name}),
+        (index: number) => setActiveCategory({index, name: categoryChartData[index].name}),
         [categoryChartData]
     );
 

@@ -1,6 +1,6 @@
-import styles from "./LoadingPage.module.css";
-import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
 import {Spinner} from "../Spinner/Spinner.tsx";
+import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
+import styles from "./LoadingPage.module.css";
 
 export const LoadingPage = () => {
     return (

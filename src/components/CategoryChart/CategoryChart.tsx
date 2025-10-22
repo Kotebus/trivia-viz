@@ -1,9 +1,9 @@
 import {type CSSProperties, use} from "react";
 import {Bar, BarChart, Cell, Tooltip, XAxis, YAxis} from 'recharts';
+import type {Margin} from "recharts/types/util/types";
+import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 import type {ChartDataItem} from "../../types/components.ts";
 import {VisuallyHidden} from "../VisuallyHiddin/VisuallyHidden.tsx";
-import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
-import type {Margin} from "recharts/types/util/types";
 
 const BAR_COLOR = 'hsl(236, 43%, 47%)';
 const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';

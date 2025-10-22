@@ -1,6 +1,6 @@
 import {useMemo} from "react";
-import {type Question} from "../types/trivia.ts";
 import type {ChartDataItem} from "../types/components.ts";
+import {type Question} from "../types/trivia.ts";
 
 /**
  * Hook for aggregating question data by categories for chart display.

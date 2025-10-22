@@ -8,7 +8,7 @@
 import type {AriaAttributes, CSSProperties, PropsWithChildren} from "react";
 
 
-const hiddenStyles : CSSProperties = {
+const hiddenStyles: CSSProperties = {
     display: 'inline-block',
     position: 'absolute',
     overflow: 'hidden',
@@ -41,7 +41,7 @@ interface VisuallyHiddenProps extends PropsWithChildren {
  * </VisuallyHidden>
  * ```
  */
-export const VisuallyHidden = ({ children, ariaLive }: VisuallyHiddenProps) => {
+export const VisuallyHidden = ({children, ariaLive}: VisuallyHiddenProps) => {
     return (
         <span aria-live={ariaLive} style={hiddenStyles}>
            {children}
