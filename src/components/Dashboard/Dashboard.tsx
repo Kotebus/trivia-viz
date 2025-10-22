@@ -34,6 +34,7 @@ export function Dashboard() {
     }
 
     if (isLoading) return (<LoadingPage/>);
+    if (error && data === undefined) return (<div>Error: {error.message}</div>);
 
     return (
         <div className={styles.grid}>
@@ -44,13 +45,7 @@ export function Dashboard() {
                     selectCategory={handleSelectCategory}
                 />
             </div>
-            { error && (
-                <div className={styles.header}>
-                    <div className={styles.error}>Error: {error.message}</div>
-                </div>
-            )}
-
-
+            {error && (<div className={styles.error}>Error: {error.message}</div>)}
             <main>
                 <CategoryChart
                     chartData={categoryChartData}
