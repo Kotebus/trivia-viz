@@ -1,5 +1,4 @@
 .grid {
-    --max-width-query: 820px;
     display: grid;
     grid-template-areas:
                 'header header'
@@ -33,7 +32,7 @@ aside {
     flex-direction: column;
     gap: 1.5rem;
 
-    @media (max-width: var(--max-width-query)) {
+    @media (max-width: 820px) {
         flex-direction: row;
     }
 }
@@ -42,7 +41,7 @@ aside figure {
     flex-grow: 1;
     margin: 5px 5px;
 
-    @media (max-width: var(--max-width-query)) {
+    @media (max-width: 820px) {
         display: flex;
         justify-content: center;
         align-items: center;

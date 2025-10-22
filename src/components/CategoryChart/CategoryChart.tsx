@@ -12,6 +12,9 @@ interface Props {
     selectCategory: (category: string) => void;
 }
 
+const BAR_COLOR = '#444BAA';
+const ACTIVE_BAR_COLOR = '#E21A75';
+
 export default function CategoryChart({chartData, selectCategory, activeIndex, setActiveIndex}: Props) {
     const handleBarSelect = (index: number) => {
         setActiveIndex(index);
@@ -21,7 +24,9 @@ export default function CategoryChart({chartData, selectCategory, activeIndex, s
     return (
         <figure>
             <BarChart
-                style={{ width: '100%', maxHeight: '70vh', aspectRatio: 1, paddingRight: '1rem' }}
+                style={{ width: '100%',
+                    maxHeight: '70vh',
+                    aspectRatio: 1, paddingRight: '1rem' }}
                 responsive
                 margin={{
                     top: 5,
@@ -35,11 +40,15 @@ export default function CategoryChart({chartData, selectCategory, activeIndex, s
                 <Tooltip />
                 <Bar
                     dataKey="value"
-                    fill="#3b82f6"
+
                     onClick={(_, index) => handleBarSelect(index)}
                 >
                     {chartData.map((_entry, index) => (
-                        <Cell cursor="pointer" fill={index === activeIndex ? '#82ca9d' : '#8884d8'} key={`cell-${index}`} />
+                        <Cell
+                            cursor="pointer"
+                            fill={index === activeIndex ? ACTIVE_BAR_COLOR : BAR_COLOR}
+                            key={`cell-${index}`}
+                        />
                     ))}
                 </Bar>
             </BarChart>
