@@ -2,7 +2,6 @@ import { SWRConfig } from "swr";
 import {Dashboard} from "./components/Dashboard/Dashboard.tsx";
 import AccessibilityProvider from "./AccessibilityProvider/AccessibilityProvider.tsx";
 import {ERROR_RETRY_COUNT, ERROR_RETRY_INTERVAL, REFRESH_INTERVAL, SHOULD_RETRY_ON_ERROR} from "./api/constants.ts";
-import MaxWidthWrapper from "./components/MaxWidthWrapper/MaxWidthWrapper.tsx";
 
 function App() {
     return (
@@ -14,9 +13,7 @@ function App() {
             errorRetryCount: ERROR_RETRY_COUNT,
         }}>
             <AccessibilityProvider>
-                <MaxWidthWrapper>
-                    <Dashboard/>
-                </MaxWidthWrapper>
+                <Dashboard/>
             </AccessibilityProvider>
         </SWRConfig>
     );
