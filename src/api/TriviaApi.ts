@@ -26,10 +26,10 @@ export const fetchQuestions = async (
             params: { amount },
             transformResponse: (r) => {
                 const data = JSON.parse(r) as ServerResponse;
-                return data.results.map(item => ({
+                return data.results?.map(item => ({
                     mainSlice: item.category,
                     detailedSlice: item.difficulty
-                } as DataItem));
+                } as DataItem)) ?? [];
             },
         },
     ).then(r => r.data);
