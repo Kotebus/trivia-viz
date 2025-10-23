@@ -17,10 +17,6 @@ filtering capabilities.
 
 ## Architecture
 
-### Custom Hooks
-- [useGetDataWithCounts.ts](src/hooks/useGetDataWithCounts.ts) - transforms an input array into aggregated count data suitable for charts.
-- [useHtmlDecodedCategoriesData.ts](src/hooks/useHtmlDecodedMainSliceData.ts) - decodes HTML categories field in data from Trivia API
-
 ### Providers
 - `AccessibilityProvider` - manages accessibility settings throughout the application
 

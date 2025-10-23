@@ -1,6 +1,6 @@
 import {type ReactNode, useCallback, useState} from "react";
-import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
+import {getDataWithCounts} from "../../utils.ts";
 import {DetailsBySliceChart} from "../DetailsBySliceChart/DetailsBySliceChart.tsx";
 import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
 import {MainChart} from "../MainChart/MainChart.tsx";
@@ -29,7 +29,7 @@ export const DynamicDashboard = ({
                                      error,
                                      staticPieChart
                                  }: DynamicDashboardProps) => {
-    const mainChartData = useGetDataWithCounts(questions, mainSliceFieldSelector);
+    const mainChartData = getDataWithCounts(questions, mainSliceFieldSelector);
     const mainSliceNames = mainChartData.map(x => x.name);
 
     const [activeSlice, setActiveSlice] = useState<ActiveSlice | undefined>(undefined);

@@ -1,5 +1,5 @@
-import {useMemo} from "react";
-import type {DataItemFieldSelectorType, DataItem} from "../types/DataItem.ts";
+import {decode} from "he";
+import type {DataItem, DataItemFieldSelectorType} from "./types/DataItem.ts";
 
 /**
  * Counts occurrences of values extracted from array items using a selector function.
@@ -22,38 +22,42 @@ export const countBySelector = <T, K>(
 };
 
 /**
- * React hook that transforms an array into aggregated count data suitable for charts.
+ * Transforms an array into aggregated and counted data suitable for charts.
  *
  * Counts occurrences of values extracted from array items using a selector function
  * and returns the result as an array of objects with `name` and `amount` properties.
  *
  * @param data - Array of items to process, or undefined
- * @param selector - Function to extract the value to count from each item
+ * @param selector - Function to extract the value to count from each item. Make sure it's defined above your component.
  *
  * @returns Array of objects with `name` (extracted value) and `amount` (count) properties.
- *
- * @example
- * ```TypeScript
- * interface Question {
- *   difficulty: string;
- * }
- *
- * const questions: Question[] = [
- *   { difficulty: 'easy' },
- *   { difficulty: 'hard' },
- *   { difficulty: 'easy' }
- * ];
- *
- * const chartData = useGetDataWithCounts(questions, q => q.difficulty);
- * // Returns: [{ name: 'easy', amount: 2 }, { name: 'hard', amount: 1 }]
- * ```
  */
-export const useGetDataWithCounts = (data: DataItem[], selector: DataItemFieldSelectorType) =>
-    useMemo(() => {
+export const getDataWithCounts = (data: DataItem[], selector: DataItemFieldSelectorType) => {
+
         if (data.length === 0) {
             return [];
         }
 
         const dataWithCounts = countBySelector(data, selector);
         return Array.from(dataWithCounts, ([name, value]) => ({name, amount: value}));
-    }, [data, selector]);
+    };
+
+/**
+ * Custom hook that decodes HTML entities in `mainSlice` fields of data.
+ *
+ * @param data - Array of data with potentially HTML-encoded `mainSlice`
+ * @returns Array of data with decoded `mainSlice` names.
+ */
+export const getHtmlDecodedMainSliceData =
+    (data: DataItem[]): DataItem[] => {
+
+            console.log('getHtmlDecodedMainSliceData');
+            if (data.length === 0) {
+                return [];
+            }
+
+            return data.map(item => ({
+                ...item,
+                mainSlice: decode(item.mainSlice),
+            }));
+    }

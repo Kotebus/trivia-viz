@@ -1,6 +1,6 @@
 import {useMemo} from "react";
-import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
+import {getDataWithCounts} from "../../utils.ts";
 import {DetailsChart} from "../DetailsChart/DetailsChart.tsx";
 import style from "./DetailsBySliceChart.module.css";
 
@@ -20,7 +20,7 @@ export const DetailsBySliceChart =
             [slice, data]
         );
 
-        const chartData = useGetDataWithCounts(filteredData, detailedSelector);
+        const chartData = getDataWithCounts(filteredData, detailedSelector);
         const sliceName = slice ?? allSlicesLabel;
 
         if (filteredData.length === 0) {
