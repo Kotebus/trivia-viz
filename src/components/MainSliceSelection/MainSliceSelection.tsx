@@ -28,14 +28,17 @@ export const MainSliceSelection = (
                 htmlFor={selectionId}>
                 Selected:
             </label>
+
             <select
                 id={selectionId}
                 value={activeSliceName}
                 onChange={handleSliceChange}
             >
+
                 <option value={ALL_SLICES_VALUE}>
                     All
                 </option>
+
                 {slicesList?.map(slice => (
                     <option value={slice} key={slice}>
                         {slice}

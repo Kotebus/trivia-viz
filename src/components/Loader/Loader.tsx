@@ -10,7 +10,9 @@ export const Loader = () => {
             aria-live="polite"
             aria-label="Loading"
         >
+
             <Spinner/>
+
             <VisuallyHidden ariaLive="polite">
                 Loading data, please wait...
             </VisuallyHidden>

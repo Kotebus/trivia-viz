@@ -57,10 +57,13 @@ export const DashboardWithFiltration = ({
 
     return (
         <div className={styles.dashboard}>
+
             {error && <FetchErrorMessage message={error.message}/>}
+
             {!isDataFromApiUndefined && (
                 <>
                     <div className={styles.header}>
+
                         <MainSliceSelection
                             slicesList={mainSliceNames}
                             activeSliceName={activeSlice?.name}
@@ -69,6 +72,7 @@ export const DashboardWithFiltration = ({
                     </div>
 
                     <main className={styles.main}>
+
                         <MainChart
                             chartData={mainChartData}
                             activeIndex={activeSlice?.index}
@@ -77,6 +81,7 @@ export const DashboardWithFiltration = ({
                     </main>
 
                     <aside className={styles.sidebar}>
+
                         {staticPieChart}
 
                         {activeSlice && (

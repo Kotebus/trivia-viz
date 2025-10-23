@@ -10,7 +10,8 @@ export const Spinner = () => {
             role="status"
             aria-label="Loading"
         >
-      <Loader color='black' size={SPINNER_SIZE} aria-hidden="true"/>
-    </span>
+
+            <Loader color='black' size={SPINNER_SIZE} aria-hidden="true"/>
+        </span>
     );
 }

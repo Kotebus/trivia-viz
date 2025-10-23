@@ -34,10 +34,12 @@ export const MainChart = ({chartData, activeIndex, setActiveIndex}: Props) => {
 
     return (
         <figure className={styles.figure}>
+
             <BarChart
                 className={styles.chart}
                 responsive={true}
                 data={chartData}>
+
                 <XAxis
                     dataKey="name"
                     textAnchor="end"
@@ -45,13 +47,17 @@ export const MainChart = ({chartData, activeIndex, setActiveIndex}: Props) => {
                     height={300}
                     tickFormatter={formatNameInXAxis}
                 />
+
                 <YAxis/>
+
                 <Tooltip/>
+
                 <Bar
                     dataKey="amount"
                     isAnimationActive={!isMotionReduced}
                     onClick={handleOnBarClick}
                 >
+
                     {chartData.map((entry, index) => (
                         <Cell
                             key={`cell-${entry.name}`}
@@ -61,6 +67,7 @@ export const MainChart = ({chartData, activeIndex, setActiveIndex}: Props) => {
                     ))}
                 </Bar>
             </BarChart>
+
             <figcaption>
                 <VisuallyHidden>Distribution by main slice</VisuallyHidden>
             </figcaption>

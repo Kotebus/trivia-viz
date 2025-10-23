@@ -23,7 +23,9 @@ export const DetailsChart = ({chartData}: DetailsChartProps) => {
     const colors = isHighContrast ? COLORS_FOR_DIFFICULTIES.contrast : COLORS_FOR_DIFFICULTIES.regular;
     return (
         <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
+
             <PieChart>
+
                 <Pie
                     isAnimationActive={!isMotionReduced}
                     data={chartData}
@@ -33,6 +35,7 @@ export const DetailsChart = ({chartData}: DetailsChartProps) => {
                     cy="50%"
                     outerRadius={PIE_CHART_OUTER_RADIUS}
                 >
+
                     {chartData.map((entry, index) => {
                         const color = colors[entry.name as Difficulty] ?? getColorForIndex(index);
                         return (
@@ -43,7 +46,9 @@ export const DetailsChart = ({chartData}: DetailsChartProps) => {
                         );
                     })}
                 </Pie>
+
                 <Tooltip/>
+
                 <Legend/>
             </PieChart>
         </ResponsiveContainer>

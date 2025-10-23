@@ -37,10 +37,13 @@ export const DetailsBySliceChart = ({
                 className={style.chart}
                 aria-label={`${sliceName} distribution`}
             >
+
                 <figcaption>
+
                     <span className={style.slice}>{sliceName}</span>
                     <span className={style.count}>Total: {filteredData?.length}</span>
                 </figcaption>
+
                 <DetailsChart chartData={chartData}/>
             </figure>
         );
