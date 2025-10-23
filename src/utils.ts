@@ -51,7 +51,6 @@ export const getDataWithCounts = (data: DataItem[], selector: DataItemFieldSelec
 export const getHtmlDecodedMainSliceData =
     (data: DataItem[]): DataItem[] => {
 
-            console.log('getHtmlDecodedMainSliceData');
             if (data.length === 0) {
                 return [];
             }
