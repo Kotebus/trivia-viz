@@ -6,7 +6,6 @@ import {type Difficulty} from "../../types/DataItem.ts";
 import {COLORS_FOR_DIFFICULTIES, getColorForIndex} from "./DetailsChartHelper.ts";
 
 const CHART_HEIGHT = 250;
-
 const PIE_CHART_OUTER_RADIUS = 80;
 
 interface DetailsChartProps {

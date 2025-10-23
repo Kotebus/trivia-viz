@@ -1,7 +1,6 @@
-import {type CSSProperties, use, useCallback} from "react";
+import {use, useCallback} from "react";
 import {Bar, BarChart, Cell, Tooltip, XAxis, YAxis} from 'recharts';
 import type {BarRectangleItem} from "recharts/types/cartesian/Bar";
-import type {Margin} from "recharts/types/util/types";
 import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 import type {ChartDataItem} from "../../types/ChartDataItem.ts";
 import {VisuallyHidden} from "../VisuallyHidden/VisuallyHidden.tsx";
@@ -10,19 +9,6 @@ import styles from "./MainChart.module.css"
 const BAR_COLOR = 'hsl(236, 43%, 47%)';
 const ACTIVE_BAR_COLOR = 'hsl(333, 79%, 49%)';
 const MAX_NAME_LENGTH = 40;
-
-const BAR_CHART_STYLE: CSSProperties = {
-    width: '100%',
-    maxHeight: '70vh',
-    aspectRatio: 1,
-};
-
-const BAR_CHART_MARGIN_DATA: Partial<Margin> = {
-    top: 5,
-    right: 5,
-    left: 0,
-    bottom: 5,
-};
 
 interface Props {
     chartData: ChartDataItem[];
@@ -47,24 +33,23 @@ export const MainChart = ({chartData, activeIndex, setActiveIndex}: Props) => {
     const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
 
     return (
-        <figure className={styles.chart}>
+        <figure className={styles.wrapper}>
             <BarChart
+                className={styles.chart}
                 responsive={true}
-                style={BAR_CHART_STYLE}
-                margin={BAR_CHART_MARGIN_DATA}
                 data={chartData}>
                 <XAxis
                     dataKey="name"
-                    angle={-90}
                     textAnchor="end"
-                    tickFormatter={formatNameInXAxis}
+                    angle={-90}
                     height={300}
+                    tickFormatter={formatNameInXAxis}
                 />
                 <YAxis/>
                 <Tooltip/>
                 <Bar
-                    isAnimationActive={!isMotionReduced}
                     dataKey="amount"
+                    isAnimationActive={!isMotionReduced}
                     onClick={handleOnBarClick}
                 >
                     {chartData.map((entry, index) => (
