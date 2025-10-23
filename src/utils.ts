@@ -1,4 +1,5 @@
 import {decode} from "he";
+import type {SortingType} from "./AppConfig.ts";
 import type {ChartDataItem} from "./types/ChartDataItem.ts";
 import type {DataItem, DataItemFieldSelectorType} from "./types/DataItem.ts";
 
@@ -30,17 +31,23 @@ export const countBySelector = <T, K>(
  *
  * @param data - Array of items to process, or undefined
  * @param selector - Function to extract the value to count from each item. Make sure it's defined above your component.
- *
+ * @param sortingType - Type of sorting to apply to the result.
  * @returns Array of `ChartDataItem` with `name` (extracted value) and `amount` (count) properties.
  */
-export const getDataWithCounts = (data: DataItem[], selector: DataItemFieldSelectorType): ChartDataItem[] => {
+export const getDataWithCounts = (
+    data: DataItem[],
+    selector: DataItemFieldSelectorType,
+    sortingType: SortingType,
+): ChartDataItem[] => {
 
         if (data.length === 0) {
             return [];
         }
 
         const dataWithCounts = countBySelector(data, selector);
-        return Array.from(dataWithCounts, ([name, value]) => ({name, amount: value}));
+        return Array.from(dataWithCounts, ([name, amount]) => ({name, amount}))
+            .sort((a, b) =>
+                sortingType === 'Ascending' ? b.amount - a.amount : a.amount - b.amount);
     };
 
 /**

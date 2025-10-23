@@ -1,9 +1,12 @@
 const DEFAULT_DATA_FETCH_AMOUNT = 300;
 
+export type SortingType = 'Ascending' | 'Descending';
+
 export interface AppConfig {
     header?: HeaderConfig,
     fetchDataAmount: number,
     allMainSlicesLabel: string,
+    sorting: SortingType,
 }
 
 export interface HeaderConfig {
@@ -19,4 +22,5 @@ export const defaultAppConfig: AppConfig = {
 
     fetchDataAmount: DEFAULT_DATA_FETCH_AMOUNT,
     allMainSlicesLabel: 'All categories',
+    sorting: 'Ascending',
 }

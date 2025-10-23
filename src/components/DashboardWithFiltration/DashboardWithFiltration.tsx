@@ -1,4 +1,5 @@
 import {type ReactNode, useState} from "react";
+import type {SortingType} from "../../AppConfig.ts";
 import type {ChartDataItem} from "../../types/ChartDataItem.ts";
 import type {DataItem} from "../../types/DataItem.ts";
 import {DetailsBySliceChart} from "../DetailsBySliceChart/DetailsBySliceChart.tsx";
@@ -19,6 +20,7 @@ interface DynamicDashboardProps {
     mainChartData: ChartDataItem[];
     allSlicesLabel: string;
     staticPieChart: ReactNode;
+    sortingType: SortingType;
 }
 
 export const DashboardWithFiltration = ({
@@ -28,6 +30,7 @@ export const DashboardWithFiltration = ({
                                      error,
                                      staticPieChart,
                                      mainChartData,
+                                     sortingType,
                                  }: DynamicDashboardProps) => {
 
     const [activeSlice, setActiveSlice] = useState<ActiveSlice | undefined>(undefined);
@@ -79,6 +82,7 @@ export const DashboardWithFiltration = ({
                             <DetailsBySliceChart
                                 allSlicesLabel={allSlicesLabel}
                                 slice={activeSlice.name}
+                                sortingType={sortingType}
                                 data={data}
                             />
                         )}

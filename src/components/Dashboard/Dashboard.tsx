@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/TriviaApi.ts";
+import type {SortingType} from "../../AppConfig.ts";
 import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
 import {getDataWithCounts, getHtmlDecodedMainSliceData} from "../../utils.ts";
 import {DashboardWithFiltration} from "../DashboardWithFiltration/DashboardWithFiltration.tsx";
@@ -13,9 +14,16 @@ interface DashboardProps {
     fetchDataAmount: number;
     allDataLabel: string;
     sourceData?: DataItem[];
+    sortingType: SortingType;
 }
 
-export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) => {
+export const Dashboard = ({
+                              fetchDataAmount,
+                              allDataLabel,
+                              sourceData,
+                              sortingType
+}: DashboardProps) => {
+
     const {data, isLoading, error} = useSWR(
         sourceData ? null : [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(fetchDataAmount)
@@ -26,7 +34,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
     }
 
     const cleanedData = getHtmlDecodedMainSliceData(data ?? []);
-    const mainChartData = getDataWithCounts(cleanedData, mainSliceFieldSelector);
+    const mainChartData = getDataWithCounts(cleanedData, mainSliceFieldSelector, sortingType);
 
     return (
         <DashboardWithFiltration
@@ -35,9 +43,11 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
             data={cleanedData}
             mainChartData={mainChartData}
             allSlicesLabel={allDataLabel}
+            sortingType={sortingType}
             staticPieChart={(
                 <DetailsBySliceChart
                     allSlicesLabel={allDataLabel}
+                    sortingType={sortingType}
                     data={cleanedData}
                 />
             )}

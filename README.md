@@ -69,8 +69,6 @@ component.
 3. **UI consistency**  
    No design system integration exists. The component needs theming support (colors, fonts etc.) to match host
    application styles.
-4. **Sorting**  
-   No data sorting in the current implementation.
 
 ### **Summary**
 

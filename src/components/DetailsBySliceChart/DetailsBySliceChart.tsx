@@ -1,3 +1,4 @@
+import type {SortingType} from "../../AppConfig.ts";
 import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
 import {getDataWithCounts} from "../../utils.ts";
 import {DetailsChart} from "../DetailsChart/DetailsChart.tsx";
@@ -9,14 +10,19 @@ interface DetailedBySliceChartProps {
     slice?: string;
     data: DataItem[];
     allSlicesLabel: string;
+    sortingType: SortingType;
 }
 
-export const DetailsBySliceChart =
-    ({slice, data, allSlicesLabel}: DetailedBySliceChartProps) => {
+export const DetailsBySliceChart = ({
+                                        slice,
+                                        data,
+                                        allSlicesLabel,
+                                        sortingType
+}: DetailedBySliceChartProps) => {
 
         const filteredData = slice ? data.filter(x => x.mainSlice === slice) : data;
 
-        const chartData = getDataWithCounts(filteredData, detailedSelector);
+        const chartData = getDataWithCounts(filteredData, detailedSelector, sortingType);
         const sliceName = slice ?? allSlicesLabel;
 
         if (filteredData.length === 0) {

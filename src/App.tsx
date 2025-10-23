@@ -33,6 +33,7 @@ export const App = ({
                     sourceData={data}
                     fetchDataAmount={appConfig.fetchDataAmount}
                     allDataLabel={appConfig.allMainSlicesLabel}
+                    sortingType={appConfig.sorting}
                 />
             </AccessibilityProvider>
         </SWRConfig>
