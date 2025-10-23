@@ -1,3 +1,4 @@
+import {useMemo} from "react";
 import useSWR, {type Fetcher} from "swr";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/TriviaApi.ts";
@@ -31,12 +32,18 @@ export const Dashboard = ({
         fetcher
     );
 
+    const cleanedData =  useMemo(
+        () => getHtmlDecodedMainSliceData(sourceData ?? data ?? []),
+        [data, sourceData]
+    );
+    const mainChartData = useMemo(
+        () => getDataWithCounts(cleanedData, mainSliceFieldSelector, sortingType),
+        [cleanedData, sortingType]
+    );
+
     if (isLoading) {
         return (<Loader/>);
     }
-
-    const cleanedData = getHtmlDecodedMainSliceData(sourceData ?? data ?? []);
-    const mainChartData = getDataWithCounts(cleanedData, mainSliceFieldSelector, sortingType);
 
     return (
         <DashboardWithFiltration

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/Kotebus/trivia-viz",
+  "homepage": "https://kotebus.github.io/trivia-viz/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
