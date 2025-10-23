@@ -8,12 +8,12 @@ const detailedSelector : DataItemFieldSelectorType = (item)=> item.detailedSlice
 
 interface DetailedBySliceChartProps {
     slice?: string;
-    data: DataItem[] | undefined;
+    data: DataItem[];
     allSlicesLabel: string;
 }
 
 export const DetailsBySliceChart =
-    ({slice, data = [], allSlicesLabel}: DetailedBySliceChartProps) => {
+    ({slice, data, allSlicesLabel}: DetailedBySliceChartProps) => {
 
         const filteredData = useMemo(
             () => slice ? data.filter(x => x.mainSlice === slice) : data,
