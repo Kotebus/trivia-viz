@@ -17,10 +17,10 @@ import type {Question} from "../types/trivia.ts";
  * ```
  */
 export const useHtmlDecodedCategoriesData =
-    (data: Question[] | undefined): Question[] => {
+    (data: Question[]): Question[] => {
 
         return useMemo(() => {
-            if (!data || data.length === 0) {
+            if (data.length === 0) {
                 return [];
             }
 

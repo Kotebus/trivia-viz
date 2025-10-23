@@ -30,7 +30,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(sourceData ? 0 : fetchDataAmount)
     );
-    const questions = useHtmlDecodedCategoriesData(data);
+    const questions = useHtmlDecodedCategoriesData(data ?? []);
     const categoryChartData = useGetDataWithCounts(questions, categorySelector);
     const categoriesNames = categoryChartData.map(x => x.name);
 
