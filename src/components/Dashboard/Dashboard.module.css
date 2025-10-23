@@ -1,27 +1,21 @@
 .dashboard {
-    --grid-gap: 8px;
     display: grid;
     grid-template-areas:
-                'error error'
-                'header header'
+                'header sidebar'
                 'main sidebar';
 
+    grid-template-rows: auto 1fr;
     grid-template-columns: 1fr 224px;
-    gap: var(--grid-gap);
+    gap: 8px;
     padding: 8px;
     margin: 0 auto;
 
     @media (max-width: 820px) {
         grid-template-areas:
-        'error error'
         'header header'
         'main main'
         'sidebar sidebar';
     }
-}
-
-.error {
-    grid-area: error;
 }
 
 .header {
@@ -30,7 +24,6 @@
     display: flex;
     place-content: center;
     justify-content: flex-start;
-    margin-top: calc(var(--grid-gap) * -1);
 }
 
 .sidebar {
