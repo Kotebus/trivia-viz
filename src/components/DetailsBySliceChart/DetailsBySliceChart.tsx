@@ -1,4 +1,3 @@
-import {useMemo} from "react";
 import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
 import {getDataWithCounts} from "../../utils.ts";
 import {DetailsChart} from "../DetailsChart/DetailsChart.tsx";
@@ -15,10 +14,7 @@ interface DetailedBySliceChartProps {
 export const DetailsBySliceChart =
     ({slice, data, allSlicesLabel}: DetailedBySliceChartProps) => {
 
-        const filteredData = useMemo(
-            () => slice ? data.filter(x => x.mainSlice === slice) : data,
-            [slice, data]
-        );
+        const filteredData = slice ? data.filter(x => x.mainSlice === slice) : data;
 
         const chartData = getDataWithCounts(filteredData, detailedSelector);
         const sliceName = slice ?? allSlicesLabel;
