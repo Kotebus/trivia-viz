@@ -2,7 +2,7 @@ import {useCallback, useState} from "react";
 import useSWR from "swr";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/trivia.ts";
-import {useGetCategoryData} from "../../hooks/useGetCategoryData.ts";
+import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
 import type {Question} from "../../types/trivia.ts";
 import {CategoryChart} from "../CategoryChart/CategoryChart.tsx";
@@ -23,14 +23,15 @@ interface DashboardProps {
     sourceData?: Question[];
 }
 
+const categorySelector = (item: Question) => item.category;
+
 export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) => {
     const {data, isLoading, error} = useSWR(
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(sourceData ? 0 : fetchDataAmount)
     );
     const questions = useHtmlDecodedCategoriesData(data);
-
-    const categoryChartData = useGetCategoryData(questions);
+    const categoryChartData = useGetDataWithCounts(questions, categorySelector);
     const categoriesNames = categoryChartData.map(x => x.name);
 
     const [activeCategory, setActiveCategory] = useState<ActiveCategory | undefined>(undefined);

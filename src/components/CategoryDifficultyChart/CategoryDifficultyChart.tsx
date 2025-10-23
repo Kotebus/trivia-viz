@@ -1,5 +1,5 @@
 import {useMemo} from "react";
-import {useGetDifficultyData} from "../../hooks/useGetDifficultyData.ts";
+import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import type {Question} from "../../types/trivia.ts";
 import {DifficultyChart} from "../DifficultyChart/DifficultyChart.tsx";
 import {VisuallyHidden} from "../VisuallyHidden/VisuallyHidden.tsx";
@@ -11,6 +11,8 @@ interface CategoryDifficultyChartProps {
     allCategoriesLabel: string;
 }
 
+const difficultySelector = (item: Question) => item.difficulty;
+
 export const CategoryDifficultyChart =
     ({category, data = [], allCategoriesLabel}: CategoryDifficultyChartProps) => {
 
@@ -19,7 +21,7 @@ export const CategoryDifficultyChart =
             [data, category]
         );
 
-        const categoryChartData = useGetDifficultyData(filteredData);
+        const categoryChartData = useGetDataWithCounts(filteredData, difficultySelector);
         const categoryName = category ?? allCategoriesLabel;
 
         if (filteredData.length === 0) {

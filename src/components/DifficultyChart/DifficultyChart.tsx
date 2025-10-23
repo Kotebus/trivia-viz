@@ -25,7 +25,7 @@ interface DifficultyChartProps {
 }
 
 export const DifficultyChart = ({chartData}: DifficultyChartProps) => {
-    const { isHighContrast, isMotionReduced} = use(AccessibilityContext);
+    const {isHighContrast, isMotionReduced} = use(AccessibilityContext);
 
     if (chartData.length === 0) {
         return null;
@@ -38,7 +38,7 @@ export const DifficultyChart = ({chartData}: DifficultyChartProps) => {
                 <Pie
                     isAnimationActive={!isMotionReduced}
                     data={chartData}
-                    dataKey="value"
+                    dataKey="amount"
                     nameKey="name"
                     cx="50%"
                     cy="50%"

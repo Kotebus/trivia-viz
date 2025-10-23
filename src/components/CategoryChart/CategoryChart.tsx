@@ -65,7 +65,7 @@ export const CategoryChart = ({chartData, activeIndex, setActiveIndex}: Props) =
                 <Tooltip/>
                 <Bar
                     isAnimationActive={!isMotionReduced}
-                    dataKey="value"
+                    dataKey="amount"
                     onClick={handleOnBarClick}
                 >
                     {chartData.map((entry, index) => (
