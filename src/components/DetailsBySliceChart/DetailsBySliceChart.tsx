@@ -2,7 +2,7 @@ import {useMemo} from "react";
 import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
 import {DetailsChart} from "../DetailsChart/DetailsChart.tsx";
-import style from "./DetailedBySliceChart.module.css";
+import style from "./DetailsBySliceChart.module.css";
 
 const detailedSelector : DataItemFieldSelectorType = (item)=> item.detailedSlice;
 
@@ -12,7 +12,7 @@ interface DetailedBySliceChartProps {
     allSlicesLabel: string;
 }
 
-export const DetailedBySliceChart =
+export const DetailsBySliceChart =
     ({slice, data = [], allSlicesLabel}: DetailedBySliceChartProps) => {
 
         const filteredData = useMemo(

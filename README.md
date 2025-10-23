@@ -27,7 +27,7 @@ filtering capabilities.
 ### Components
 - [Dashboard.tsx](src/components/Dashboard/Dashboard.tsx) - main component with data fetching and visualization
 - [MainChart.tsx](src/components/MainChart/MainChart.tsx) - main BarChart by category (or by provided main slice selector - `mainSliceFieldSelector`)
-- [DetailedBySliceChart.tsx](src/components/DetailedBySliceChart/DetailedBySliceChart.tsx) - wrapper with information about selected slice around `DetailsChart`
+- [DetailsBySliceChart.tsx](src/components/DetailsBySliceChart/DetailsBySliceChart.tsx) - wrapper with information about selected slice around `DetailsChart`
 - [DetailsChart.tsx](src/components/DetailsChart/DetailsChart.tsx) - PieChart visualizations by difficulty (or by provided details selector - `detailedSelector`)
 - [MainSliceSelection.tsx](src/components/MainSliceSelection/MainSliceSelection.tsx) - selection dropdown for main slice
 - [Header.tsx](src/components/Header/Header.tsx) - application header

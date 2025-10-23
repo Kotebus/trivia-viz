@@ -6,7 +6,7 @@ import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import {useHtmlDecodedMainSliceData} from "../../hooks/useHtmlDecodedMainSliceData.ts";
 import type {DataItemFieldSelectorType, DataItem} from "../../types/DataItem.ts";
 import {MainChart} from "../MainChart/MainChart.tsx";
-import {DetailedBySliceChart} from "../DetailedBySliceChart/DetailedBySliceChart.tsx";
+import {DetailsBySliceChart} from "../DetailsBySliceChart/DetailsBySliceChart.tsx";
 import {MainSliceSelection} from "../MainSliceSelection/MainSliceSelection.tsx";
 import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
 import {LoadingPage} from "../LoadingPage/LoadingPage.tsx";
@@ -87,13 +87,13 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
                     </main>
 
                     <aside className={styles.sidebar}>
-                        <DetailedBySliceChart
+                        <DetailsBySliceChart
                             allSlicesLabel={allDataLabel}
                             data={questions}
                         />
 
                         {activeSlice && (
-                            <DetailedBySliceChart
+                            <DetailsBySliceChart
                                 allSlicesLabel={allDataLabel}
                                 slice={activeSlice.name}
                                 data={questions}

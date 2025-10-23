@@ -1,4 +1,5 @@
 import {type ChangeEvent, useId} from "react";
+import styles from "./MainSliceSelection.module.css";
 
 interface MainSliceSelectionProps {
     slicesList: string[];
@@ -22,10 +23,11 @@ export const MainSliceSelection = (
 
     return (
         <>
-            <label htmlFor={selectionId}>
-                Selected:{' '}
+            <label
+                className={styles.label}
+                htmlFor={selectionId}>
+                Selected:
             </label>
-
             <select
                 id={selectionId}
                 value={activeSliceName}
