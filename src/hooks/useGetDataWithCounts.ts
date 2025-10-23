@@ -1,4 +1,5 @@
 import {useMemo} from "react";
+import type {DataFieldSelectorType, DataItem} from "../types/DataItem.ts";
 
 /**
  * Counts occurrences of values extracted from array items using a selector function.
@@ -26,9 +27,6 @@ export const countBySelector = <T, K>(
  * Counts occurrences of values extracted from array items using a selector function
  * and returns the result as an array of objects with `name` and `amount` properties.
  *
- * @template T - Type of items in the input array
- * @template K - Type of the key extracted by the selector function
- *
  * @param data - Array of items to process, or undefined
  * @param selector - Function to extract the value to count from each item
  *
@@ -50,9 +48,9 @@ export const countBySelector = <T, K>(
  * // Returns: [{ name: 'easy', amount: 2 }, { name: 'hard', amount: 1 }]
  * ```
  */
-export const useGetDataWithCounts = <T, K>(data: T[] | undefined, selector: (item: T) => K) =>
+export const useGetDataWithCounts = (data: DataItem[], selector: DataFieldSelectorType) =>
     useMemo(() => {
-        if (!data || data.length === 0) {
+        if (data.length === 0) {
             return [];
         }
 

@@ -17,7 +17,7 @@ interface ActiveSlice {
     index: number;
 }
 
-const mainSliceFieldSelector : DataFieldSelectorType = (item)=> item.mainSlice;
+const mainSliceFieldSelector : DataFieldSelectorType = (item) => item.mainSlice;
 
 interface DashboardProps {
     fetchDataAmount: number;
