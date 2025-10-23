@@ -1,9 +1,11 @@
+import type {DataFieldSelectorType} from "./types/trivia.ts";
+
 const DEFAULT_DATA_FETCH_AMOUNT = 300;
 
 export interface AppConfig {
     header?: HeaderConfig,
     fetchDataAmount: number,
-    allDataLabel: string,
+    allMainSlicesLabel: string,
 }
 
 export interface HeaderConfig {
@@ -18,5 +20,8 @@ export const defaultAppConfig: AppConfig = {
     },
 
     fetchDataAmount: DEFAULT_DATA_FETCH_AMOUNT,
-    allDataLabel: 'All categories',
+    allMainSlicesLabel: 'All categories',
 }
+
+export const categoryFieldSelector : DataFieldSelectorType = (item)=> item.category;
+export const difficultyFieldSelector : DataFieldSelectorType = (item)=> item.difficulty;

@@ -3,35 +3,24 @@ import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "rechart
 import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 import type {ChartDataItem} from "../../types/ChartDataItem.ts";
 import {type Difficulty} from "../../types/trivia.ts";
+import {COLORS_FOR_DIFFICULTIES, getColorForIndex} from "./DetailsChartHelper.ts";
 
 const CHART_HEIGHT = 250;
+
 const PIE_CHART_OUTER_RADIUS = 80;
 
-const COLORS = {
-    regular: {
-        easy: 'hsl(95, 75%, 31%)',
-        medium: 'hsl(35,96%,56%)',
-        hard: 'hsl(0,86%,55%)',
-    },
-    contrast: {
-        easy: 'hsl(207, 83%, 44%)',
-        medium: 'hsl(167, 94%, 25%)',
-        hard: 'hsl(350, 100%, 38%)',
-    },
-}
-
-interface DifficultyChartProps {
+interface DetailsChartProps {
     chartData: ChartDataItem[];
 }
 
-export const DifficultyChart = ({chartData}: DifficultyChartProps) => {
+export const DetailsChart = ({chartData}: DetailsChartProps) => {
     const {isHighContrast, isMotionReduced} = use(AccessibilityContext);
 
     if (chartData.length === 0) {
         return null;
     }
 
-    const colors = isHighContrast ? COLORS.contrast : COLORS.regular;
+    const colors = isHighContrast ? COLORS_FOR_DIFFICULTIES.contrast : COLORS_FOR_DIFFICULTIES.regular;
     return (
         <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
             <PieChart>
@@ -44,12 +33,15 @@ export const DifficultyChart = ({chartData}: DifficultyChartProps) => {
                     cy="50%"
                     outerRadius={PIE_CHART_OUTER_RADIUS}
                 >
-                    {chartData.map((entry) => (
-                        <Cell
-                            key={entry.name}
-                            fill={colors[entry.name as Difficulty]}
-                        />
-                    ))}
+                    {chartData.map((entry, index) => {
+                        const color = colors[entry.name as Difficulty] ?? getColorForIndex(index);
+                        return (
+                            <Cell
+                                key={entry.name}
+                                fill={color}
+                            />
+                        );
+                    })}
                 </Pie>
                 <Tooltip/>
                 <Legend/>

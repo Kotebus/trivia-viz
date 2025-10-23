@@ -4,15 +4,15 @@ import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/trivia.ts";
 import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
-import type {Question} from "../../types/trivia.ts";
-import {CategoryChart} from "../CategoryChart/CategoryChart.tsx";
-import {CategoryDifficultyChart} from "../CategoryDifficultyChart/CategoryDifficultyChart.tsx";
-import {CategorySelection} from "../CategorySelection/CategorySelection.tsx";
+import type {Question, DataFieldSelectorType} from "../../types/trivia.ts";
+import {MainChart} from "../MainChart/MainChart.tsx";
+import {DetailedBySliceChart} from "../DetailedBySliceChart/DetailedBySliceChart.tsx";
+import {MainSliceSelection} from "../MainSliceSelection/MainSliceSelection.tsx";
 import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
 import {LoadingPage} from "../LoadingPage/LoadingPage.tsx";
 import styles from "./Dashboard.module.css";
 
-interface ActiveCategory {
+interface ActiveSlice {
     name: string;
     index: number;
 }
@@ -21,35 +21,35 @@ interface DashboardProps {
     fetchDataAmount: number;
     allDataLabel: string;
     sourceData?: Question[];
+    mainSliceFieldSelector: DataFieldSelectorType;
+    detailedSelector: DataFieldSelectorType;
 }
 
-const categorySelector = (item: Question) => item.category;
-
-export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) => {
+export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData, mainSliceFieldSelector, detailedSelector}: DashboardProps) => {
     const {data, isLoading, error} = useSWR(
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(sourceData ? 0 : fetchDataAmount)
     );
     const questions = useHtmlDecodedCategoriesData(data ?? []);
-    const categoryChartData = useGetDataWithCounts(questions, categorySelector);
-    const categoriesNames = categoryChartData.map(x => x.name);
+    const mainChartData = useGetDataWithCounts(questions, mainSliceFieldSelector);
+    const mainSliceNames = mainChartData.map(x => x.name);
 
-    const [activeCategory, setActiveCategory] = useState<ActiveCategory | undefined>(undefined);
+    const [activeSlice, setActiveSlice] = useState<ActiveSlice | undefined>(undefined);
 
-    const handleSelectCategory = (categoryName?: string) => {
-        const nextActiveCategory = categoryName ?
+    const handleSelectMainSlice = (sliceName?: string) => {
+        const nextActiveSlice = sliceName ?
             {
-                name: categoryName,
-                index: categoryChartData.findIndex(x => x.name === categoryName)
+                name: sliceName,
+                index: mainChartData.findIndex(x => x.name === sliceName)
             } :
             undefined;
 
-        setActiveCategory(nextActiveCategory);
+        setActiveSlice(nextActiveSlice);
     }
 
-    const setActiveCategoryByIndex = useCallback(
-        (index: number) => setActiveCategory({index, name: categoryChartData[index].name}),
-        [categoryChartData]
+    const setActiveSliceByIndex = useCallback(
+        (index: number) => setActiveSlice({index, name: mainChartData[index].name}),
+        [mainChartData]
     );
 
     if (isLoading) {
@@ -72,30 +72,34 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
             {data !== undefined && (
                 <>
                     <div className={styles.header}>
-                        <CategorySelection
-                            categoriesList={categoriesNames}
-                            activeCategoryName={activeCategory?.name}
-                            selectCategory={handleSelectCategory}
+                        <MainSliceSelection
+                            slicesList={mainSliceNames}
+                            activeSliceName={activeSlice?.name}
+                            selectSlice={handleSelectMainSlice}
                         />
                     </div>
                     <main className={styles.main}>
-                        <CategoryChart
-                            chartData={categoryChartData}
-                            activeIndex={activeCategory?.index}
-                            setActiveIndex={setActiveCategoryByIndex}
+                        <MainChart
+                            chartData={mainChartData}
+                            activeIndex={activeSlice?.index}
+                            setActiveIndex={setActiveSliceByIndex}
                         />
                     </main>
 
                     <aside className={styles.sidebar}>
-                        <CategoryDifficultyChart
-                            allCategoriesLabel={allDataLabel}
+                        <DetailedBySliceChart
+                            mainSliceSelector={mainSliceFieldSelector}
+                            detailedSelector={detailedSelector}
+                            allSlicesLabel={allDataLabel}
                             data={questions}
                         />
 
-                        {activeCategory && (
-                            <CategoryDifficultyChart
-                                allCategoriesLabel={allDataLabel}
-                                category={activeCategory.name}
+                        {activeSlice && (
+                            <DetailedBySliceChart
+                                allSlicesLabel={allDataLabel}
+                                slice={activeSlice.name}
+                                mainSliceSelector={mainSliceFieldSelector}
+                                detailedSelector={detailedSelector}
                                 data={questions}
                             />
                         )}
