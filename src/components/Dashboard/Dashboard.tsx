@@ -18,7 +18,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(sourceData ? 0 : fetchDataAmount)
     );
-    const questions = getHtmlDecodedMainSliceData(data ?? []);
+    const cleanedData = getHtmlDecodedMainSliceData(data ?? []);
 
     if (isLoading) {
         return (<LoadingPage/>);
@@ -26,14 +26,14 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
 
     return (
         <DynamicDashboard
-            isApiDataUndefined={data === undefined}
+            isDataFromApiUndefined={data === undefined}
             error={error}
-            questions={questions}
+            data={cleanedData}
             allSlicesLabel={allDataLabel}
             staticPieChart={(
                 <DetailsBySliceChart
                     allSlicesLabel={allDataLabel}
-                    data={questions}
+                    data={cleanedData}
                 />
             )}
         />

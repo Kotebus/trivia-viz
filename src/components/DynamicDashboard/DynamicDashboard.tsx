@@ -15,21 +15,21 @@ interface ActiveSlice {
 const mainSliceFieldSelector: DataItemFieldSelectorType = (item) => item.mainSlice;
 
 interface DynamicDashboardProps {
-    isApiDataUndefined: boolean;
+    isDataFromApiUndefined: boolean;
     error?: Error;
-    questions: DataItem[];
+    data: DataItem[];
     allSlicesLabel: string;
     staticPieChart: ReactNode;
 }
 
 export const DynamicDashboard = ({
-                                     questions,
+                                     data,
                                      allSlicesLabel,
-                                     isApiDataUndefined,
+                                     isDataFromApiUndefined,
                                      error,
                                      staticPieChart
                                  }: DynamicDashboardProps) => {
-    const mainChartData = getDataWithCounts(questions, mainSliceFieldSelector);
+    const mainChartData = getDataWithCounts(data, mainSliceFieldSelector);
     const mainSliceNames = mainChartData.map(x => x.name);
 
     const [activeSlice, setActiveSlice] = useState<ActiveSlice | undefined>(undefined);
@@ -50,14 +50,14 @@ export const DynamicDashboard = ({
         [mainChartData]
     );
 
-    if (questions.length === 0 && !error) {
+    if (data.length === 0 && !error) {
         return (<div>No data.</div>);
     }
 
     return (
         <div className={styles.dashboard}>
             {error && <FetchErrorMessage message={error.message}/>}
-            {!isApiDataUndefined && (
+            {!isDataFromApiUndefined && (
                 <>
                     <div className={styles.header}>
                         <MainSliceSelection
@@ -81,7 +81,7 @@ export const DynamicDashboard = ({
                             <DetailsBySliceChart
                                 allSlicesLabel={allSlicesLabel}
                                 slice={activeSlice.name}
-                                data={questions}
+                                data={data}
                             />
                         )}
                     </aside>
