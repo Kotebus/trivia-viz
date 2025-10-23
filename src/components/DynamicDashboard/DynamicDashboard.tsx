@@ -1,6 +1,6 @@
-import {type ReactNode, useCallback, useState} from "react";
-import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
-import {getDataWithCounts} from "../../utils.ts";
+import {type ReactNode, useState} from "react";
+import type {ChartDataItem} from "../../types/ChartDataItem.ts";
+import type {DataItem} from "../../types/DataItem.ts";
 import {DetailsBySliceChart} from "../DetailsBySliceChart/DetailsBySliceChart.tsx";
 import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
 import {MainChart} from "../MainChart/MainChart.tsx";
@@ -12,12 +12,11 @@ interface ActiveSlice {
     index: number;
 }
 
-const mainSliceFieldSelector: DataItemFieldSelectorType = (item) => item.mainSlice;
-
 interface DynamicDashboardProps {
     isDataFromApiUndefined: boolean;
     error?: Error;
     data: DataItem[];
+    mainChartData: ChartDataItem[];
     allSlicesLabel: string;
     staticPieChart: ReactNode;
 }
@@ -27,12 +26,17 @@ export const DynamicDashboard = ({
                                      allSlicesLabel,
                                      isDataFromApiUndefined,
                                      error,
-                                     staticPieChart
+                                     staticPieChart,
+                                     mainChartData,
                                  }: DynamicDashboardProps) => {
-    const mainChartData = getDataWithCounts(data, mainSliceFieldSelector);
-    const mainSliceNames = mainChartData.map(x => x.name);
 
     const [activeSlice, setActiveSlice] = useState<ActiveSlice | undefined>(undefined);
+
+    if (data.length === 0 && !error) {
+        return (<div>No data.</div>);
+    }
+
+    const mainSliceNames = mainChartData.map(x => x.name);
 
     const handleSelectMainSlice = (sliceName?: string) => {
         const nextActiveSlice = sliceName ?
@@ -45,14 +49,8 @@ export const DynamicDashboard = ({
         setActiveSlice(nextActiveSlice);
     }
 
-    const setActiveSliceByIndex = useCallback(
-        (index: number) => setActiveSlice({index, name: mainChartData[index].name}),
-        [mainChartData]
-    );
-
-    if (data.length === 0 && !error) {
-        return (<div>No data.</div>);
-    }
+    const setActiveSliceByIndex =
+        (index: number) => setActiveSlice({index, name: mainChartData[index].name});
 
     return (
         <div className={styles.dashboard}>

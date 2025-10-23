@@ -14,6 +14,7 @@ interface DetailsChartProps {
 }
 
 export const DetailsChart = ({chartData}: DetailsChartProps) => {
+
     const {isHighContrast, isMotionReduced} = use(AccessibilityContext);
 
     if (chartData.length === 0) {

@@ -1,4 +1,5 @@
 import {decode} from "he";
+import type {ChartDataItem} from "./types/ChartDataItem.ts";
 import type {DataItem, DataItemFieldSelectorType} from "./types/DataItem.ts";
 
 /**
@@ -30,9 +31,9 @@ export const countBySelector = <T, K>(
  * @param data - Array of items to process, or undefined
  * @param selector - Function to extract the value to count from each item. Make sure it's defined above your component.
  *
- * @returns Array of objects with `name` (extracted value) and `amount` (count) properties.
+ * @returns Array of `ChartDataItem` with `name` (extracted value) and `amount` (count) properties.
  */
-export const getDataWithCounts = (data: DataItem[], selector: DataItemFieldSelectorType) => {
+export const getDataWithCounts = (data: DataItem[], selector: DataItemFieldSelectorType): ChartDataItem[] => {
 
         if (data.length === 0) {
             return [];
