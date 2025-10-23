@@ -1,10 +1,10 @@
 import {useCallback, useState} from "react";
 import useSWR from "swr";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
-import {fetchQuestions} from "../../api/trivia.ts";
+import {fetchQuestions} from "../../api/TriviaApi.ts";
 import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
-import {useHtmlDecodedCategoriesData} from "../../hooks/useHtmlDecodedCategoriesData.ts";
-import type {Question, DataFieldSelectorType} from "../../types/trivia.ts";
+import {useHtmlDecodedMainSliceData} from "../../hooks/useHtmlDecodedMainSliceData.ts";
+import type {DataFieldSelectorType, DataItem} from "../../types/DataItem.ts";
 import {MainChart} from "../MainChart/MainChart.tsx";
 import {DetailedBySliceChart} from "../DetailedBySliceChart/DetailedBySliceChart.tsx";
 import {MainSliceSelection} from "../MainSliceSelection/MainSliceSelection.tsx";
@@ -17,20 +17,20 @@ interface ActiveSlice {
     index: number;
 }
 
+const mainSliceFieldSelector : DataFieldSelectorType = (item)=> item.mainSlice;
+
 interface DashboardProps {
     fetchDataAmount: number;
     allDataLabel: string;
-    sourceData?: Question[];
-    mainSliceFieldSelector: DataFieldSelectorType;
-    detailedSelector: DataFieldSelectorType;
+    sourceData?: DataItem[];
 }
 
-export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData, mainSliceFieldSelector, detailedSelector}: DashboardProps) => {
+export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: DashboardProps) => {
     const {data, isLoading, error} = useSWR(
         [API_CONFIG.QUESTIONS_REQUEST_KEY],
         () => fetchQuestions(sourceData ? 0 : fetchDataAmount)
     );
-    const questions = useHtmlDecodedCategoriesData(data ?? []);
+    const questions = useHtmlDecodedMainSliceData(data ?? []);
     const mainChartData = useGetDataWithCounts(questions, mainSliceFieldSelector);
     const mainSliceNames = mainChartData.map(x => x.name);
 
@@ -88,8 +88,6 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData, mainSliceF
 
                     <aside className={styles.sidebar}>
                         <DetailedBySliceChart
-                            mainSliceSelector={mainSliceFieldSelector}
-                            detailedSelector={detailedSelector}
                             allSlicesLabel={allDataLabel}
                             data={questions}
                         />
@@ -98,8 +96,6 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData, mainSliceF
                             <DetailedBySliceChart
                                 allSlicesLabel={allDataLabel}
                                 slice={activeSlice.name}
-                                mainSliceSelector={mainSliceFieldSelector}
-                                detailedSelector={detailedSelector}
                                 data={questions}
                             />
                         )}

@@ -19,7 +19,7 @@ filtering capabilities.
 
 ### Custom Hooks
 - [useGetDataWithCounts.ts](src/hooks/useGetDataWithCounts.ts) - transforms an input array into aggregated count data suitable for charts.
-- [useHtmlDecodedCategoriesData.ts](src/hooks/useHtmlDecodedCategoriesData.ts) - decodes HTML categories field in data from Trivia API
+- [useHtmlDecodedCategoriesData.ts](src/hooks/useHtmlDecodedMainSliceData.ts) - decodes HTML categories field in data from Trivia API
 
 ### Providers
 - `AccessibilityProvider` - manages accessibility settings throughout the application
@@ -41,20 +41,11 @@ Properties of [App.tsx](src/App.tsx).
 
 `@property {AppConfig} [appConfig]`: application configuration settings. Defaults to `defaultAppConfig` (see [AppConfig.ts](src/AppConfig.ts)) if not provided.
 
-`@property {Question[]} [data]`: array of data to display. If provided, the app will use this data instead of fetching from API (see [trivia.ts](src/api/trivia.ts)).
-
-`@property {DataFieldSelectorType} [mainSliceFieldSelector]`: main field selector from the data used to build the primary dashboard chart.
-Expected to have up to 30 different values for optimal visualization.
-Defaults to `categoryFieldSelector` (see [AppConfig.ts](src/AppConfig.ts)) if not provided.
-
-`@property {DataFieldSelectorType} [detailedSelector]`: additional breakdown selector for detailed view.
-Expected to have between 2 to 6 different values for optimal UI.
-More values may result in uncomfortable UI experience.
-Defaults to `difficultyFieldSelector` (see [AppConfig.ts](src/AppConfig.ts)) if not provided.
+`@property {Question[]} [data]`: array of data to display. If provided, the app will use this data instead of fetching from API (see [DataItem.ts](src/api/TriviaApi.ts)).
 
 ## API Integration
 
-If data isn't provided the application uses data from an external trivia API (see [trivia.ts](src/api/trivia.ts)).
+If data isn't provided, the application uses data from an external trivia API (see [DataItem.ts](src/api/TriviaApi.ts)).
 API configuration can be found in [ApiConfig.ts](src/api/ApiConfig.ts).
 
 ## Integration challenges
@@ -64,13 +55,12 @@ Keeping in mind the objectives of the project I am applying for, I tried to expo
 
 1.  **Scalability**  
     The current implementation assumes moderate data variance (10-20 categories, 3-5 difficulty levels). This visual solution is designed for a certain variability of the sample.
-
 2.  **Data contracts**  
     The tool operates on string names rather than IDs due to the Trivia API structure. Production systems require ID-based operations and normalized data models (`{id, name}`).
-
 3.  **UI consistency**  
     No design system integration exists. The component needs theming support (colors, fonts etc.) to match host application styles.
-
+4. **Sorting**  
+   No data sorting in current implementation
 
 ### **Summary**
 

@@ -1,23 +1,23 @@
 import {useMemo} from "react";
 import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
-import type {Question, DataFieldSelectorType} from "../../types/trivia.ts";
+import type {DataItem, DataFieldSelectorType} from "../../types/DataItem.ts";
 import {DetailsChart} from "../DetailsChart/DetailsChart.tsx";
 import style from "./DetailedBySliceChart.module.css";
 
+const detailedSelector : DataFieldSelectorType = (item)=> item.detailedSlice;
+
 interface DetailedBySliceChartProps {
     slice?: string;
-    data: Question[] | undefined;
+    data: DataItem[] | undefined;
     allSlicesLabel: string;
-    mainSliceSelector: DataFieldSelectorType;
-    detailedSelector: DataFieldSelectorType;
 }
 
 export const DetailedBySliceChart =
-    ({slice, data = [], allSlicesLabel, mainSliceSelector, detailedSelector}: DetailedBySliceChartProps) => {
+    ({slice, data = [], allSlicesLabel}: DetailedBySliceChartProps) => {
 
         const filteredData = useMemo(
-            () => slice ? data.filter(x => mainSliceSelector(x) === slice) : data,
-            [slice, data, mainSliceSelector]
+            () => slice ? data.filter(x => x.mainSlice === slice) : data,
+            [slice, data]
         );
 
         const chartData = useGetDataWithCounts(filteredData, detailedSelector);

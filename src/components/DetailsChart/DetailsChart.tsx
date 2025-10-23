@@ -2,7 +2,7 @@ import {use} from "react";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 import {AccessibilityContext} from "../../providers/AccessibilityProvider/AccessibilityContext.tsx";
 import type {ChartDataItem} from "../../types/ChartDataItem.ts";
-import {type Difficulty} from "../../types/trivia.ts";
+import {type Difficulty} from "../../types/DataItem.ts";
 import {COLORS_FOR_DIFFICULTIES, getColorForIndex} from "./DetailsChartHelper.ts";
 
 const CHART_HEIGHT = 250;
