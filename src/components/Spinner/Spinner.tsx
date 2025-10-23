@@ -6,13 +6,9 @@ const SPINNER_SIZE = 24;
 export const Spinner = () => {
     return (
         <span
-            className={styles.wrapper}
+            className={styles.loader}
             role="status"
             aria-label="Loading"
-            style={{
-                width: SPINNER_SIZE,
-                height: SPINNER_SIZE,
-            }}
         >
       <Loader color='black' size={SPINNER_SIZE} aria-hidden="true"/>
     </span>

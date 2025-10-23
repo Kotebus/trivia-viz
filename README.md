@@ -33,7 +33,7 @@ filtering capabilities.
   provided details selector - `detailedSelector`)
 - [MainSliceSelection.tsx](src/components/MainSliceSelection/MainSliceSelection.tsx) - selection dropdown for main slice
 - [Header.tsx](src/components/Header/Header.tsx) - application header
-- [LoadingPage.tsx](src/components/LoadingPage/LoadingPage.tsx)- loading state display
+- [Loader.tsx](src/components/Loader/Loader.tsx)- loading state display
 - [FetchErrorMessage.tsx](src/components/FetchErrorMessage/FetchErrorMessage.tsx) - error state for data loading
 - [VisuallyHidden.tsx](src/components/VisuallyHidden/VisuallyHidden.tsx) - accessibility helper component
 

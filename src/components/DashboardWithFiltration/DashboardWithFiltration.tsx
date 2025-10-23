@@ -67,6 +67,7 @@ export const DashboardWithFiltration = ({
                             selectSlice={handleSelectMainSlice}
                         />
                     </div>
+
                     <main className={styles.main}>
                         <MainChart
                             chartData={mainChartData}

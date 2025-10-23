@@ -33,7 +33,7 @@ export const MainChart = ({chartData, activeIndex, setActiveIndex}: Props) => {
     const isMotionReduced = accessibilityContext?.isMotionReduced ?? false;
 
     return (
-        <figure className={styles.wrapper}>
+        <figure className={styles.figure}>
             <BarChart
                 className={styles.chart}
                 responsive={true}

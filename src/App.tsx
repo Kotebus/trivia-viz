@@ -28,7 +28,13 @@ export const App = ({
             errorRetryCount: API_CONFIG.ERROR_RETRY_COUNT,
         }}>
             <AccessibilityProvider>
-                {appConfig.header && (<Header config={appConfig.header}/>)}
+                {appConfig.header && (
+                    <Header
+                        title={appConfig.header.title}
+                        subtitle={appConfig?.header.subtitle}
+                    />)
+                }
+
                 <Dashboard
                     sourceData={data}
                     fetchDataAmount={appConfig.fetchDataAmount}

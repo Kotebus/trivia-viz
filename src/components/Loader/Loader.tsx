@@ -1,11 +1,11 @@
 import {Spinner} from "../Spinner/Spinner.tsx";
 import {VisuallyHidden} from "../VisuallyHidden/VisuallyHidden.tsx";
-import styles from "./LoadingPage.module.css";
+import styles from "./Loader.module.css";
 
-export const LoadingPage = () => {
+export const Loader = () => {
     return (
         <div
-            className={styles.wrapper}
+            className={styles.loader}
             role="status"
             aria-live="polite"
             aria-label="Loading"

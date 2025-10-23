@@ -1,11 +1,15 @@
-import type {HeaderConfig} from "../../AppConfig.ts";
 import styles from './Header.module.css';
 
-export const Header = ({config}: { config: HeaderConfig }) => {
+interface HeaderProps {
+    title: string;
+    subtitle?: string;
+}
+
+export const Header = ({title, subtitle}: HeaderProps) => {
     return (
         <header className={styles.header}>
-            <h1 className={styles.title}>{config.title}</h1>
-            {config.subtitle && (<p className={styles.subtitle}>{config.subtitle}</p>)}
+            <h1 className={styles.title}>{title}</h1>
+            {subtitle && (<p className={styles.subtitle}>{subtitle}</p>)}
         </header>
     );
 }

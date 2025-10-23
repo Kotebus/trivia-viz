@@ -1,13 +1,12 @@
 import {API_CONFIG} from "../../api/ApiConfig.ts";
-import styles from "./FetchErrorMessage.module.css";
 
 interface FetchErrorMessageProps {
     message: string;
 }
 export const FetchErrorMessage = ({message}: FetchErrorMessageProps) => {
     return (
-        <div role={'alert'} className={styles.wrapper}>
-            <h2>Failed to load data</h2>
+        <div role='alert'>
+            <strong>Failed to load data</strong>
             <p>{message}</p>
             {API_CONFIG.SHOULD_RETRY_ON_ERROR && (
                 <p>

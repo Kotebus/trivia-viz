@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, {type Fetcher} from "swr";
 import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/TriviaApi.ts";
 import type {SortingType} from "../../AppConfig.ts";
@@ -6,7 +6,7 @@ import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts"
 import {getDataWithCounts, getHtmlDecodedMainSliceData} from "../../utils.ts";
 import {DashboardWithFiltration} from "../DashboardWithFiltration/DashboardWithFiltration.tsx";
 import {DetailsBySliceChart} from "../DetailsBySliceChart/DetailsBySliceChart.tsx";
-import {LoadingPage} from "../LoadingPage/LoadingPage.tsx";
+import {Loader} from "../Loader/Loader.tsx";
 
 const mainSliceFieldSelector: DataItemFieldSelectorType = (item) => item.mainSlice;
 
@@ -17,6 +17,8 @@ interface DashboardProps {
     sortingType: SortingType;
 }
 
+const fetcher: Fetcher<DataItem[], [string, number]> = ([, amount]) => fetchQuestions(amount);
+
 export const Dashboard = ({
                               fetchDataAmount,
                               allDataLabel,
@@ -24,16 +26,16 @@ export const Dashboard = ({
                               sortingType
 }: DashboardProps) => {
 
-    const {data, isLoading, error} = useSWR(
-        sourceData ? null : [API_CONFIG.QUESTIONS_REQUEST_KEY],
-        () => fetchQuestions(fetchDataAmount)
+    const {data, isLoading, error} = useSWR<DataItem[], Error>(
+        sourceData ? null : [API_CONFIG.QUESTIONS_REQUEST_KEY, fetchDataAmount],
+        fetcher
     );
 
     if (isLoading) {
-        return (<LoadingPage/>);
+        return (<Loader/>);
     }
 
-    const cleanedData = getHtmlDecodedMainSliceData(data ?? []);
+    const cleanedData = getHtmlDecodedMainSliceData(sourceData ?? data ?? []);
     const mainChartData = getDataWithCounts(cleanedData, mainSliceFieldSelector, sortingType);
 
     return (
