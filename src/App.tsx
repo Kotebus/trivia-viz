@@ -8,7 +8,7 @@ import type {DataFieldSelectorType, Question} from "./types/trivia.ts";
 
 /**
  * @property {AppConfig} [appConfig] - Application configuration settings. Defaults to defaultAppConfig if not provided.
- * @property {Question[]} [data] - Array of trivia questions to display. If provided, the app will use this data instead of fetching from API.
+ * @property {Question[]} [data] - Array of data to display. If provided, the app will use this data instead of fetching from API.
  * @property {DataFieldSelectorType} [mainSliceFieldSelector] - Main field selector from the data used to build the primary dashboard chart.
  *                                                               Expected to have up to 30 different values for optimal visualization.
  *                                                               Defaults to categoryFieldSelector if not provided.
@@ -45,7 +45,7 @@ export const App = ({
                     detailedSelector={detailedSelector ?? difficultyFieldSelector}
                     mainSliceFieldSelector={mainSliceFieldSelector ?? categoryFieldSelector}
                     fetchDataAmount={appConfig.fetchDataAmount}
-                    allDataLabel={appConfig.allDataLabel}
+                    allDataLabel={appConfig.allMainSlicesLabel}
                 />
             </AccessibilityProvider>
         </SWRConfig>
