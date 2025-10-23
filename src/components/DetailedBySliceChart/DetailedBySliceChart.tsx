@@ -1,10 +1,10 @@
 import {useMemo} from "react";
 import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
-import type {DataItem, DataFieldSelectorType} from "../../types/DataItem.ts";
+import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
 import {DetailsChart} from "../DetailsChart/DetailsChart.tsx";
 import style from "./DetailedBySliceChart.module.css";
 
-const detailedSelector : DataFieldSelectorType = (item)=> item.detailedSlice;
+const detailedSelector : DataItemFieldSelectorType = (item)=> item.detailedSlice;
 
 interface DetailedBySliceChartProps {
     slice?: string;

@@ -12,6 +12,6 @@ export interface DataItem {
     detailedSlice: Difficulty | string;
 }
 
-type QuestionFieldTypes = DataItem[keyof DataItem];
+type DataItemFieldTypes = DataItem[keyof DataItem];
 
-export type DataFieldSelectorType = (item: DataItem) => QuestionFieldTypes;
+export type DataItemFieldSelectorType = (item: DataItem) => DataItemFieldTypes;

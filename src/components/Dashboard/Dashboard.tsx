@@ -4,7 +4,7 @@ import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/TriviaApi.ts";
 import {useGetDataWithCounts} from "../../hooks/useGetDataWithCounts.ts";
 import {useHtmlDecodedMainSliceData} from "../../hooks/useHtmlDecodedMainSliceData.ts";
-import type {DataFieldSelectorType, DataItem} from "../../types/DataItem.ts";
+import type {DataItemFieldSelectorType, DataItem} from "../../types/DataItem.ts";
 import {MainChart} from "../MainChart/MainChart.tsx";
 import {DetailedBySliceChart} from "../DetailedBySliceChart/DetailedBySliceChart.tsx";
 import {MainSliceSelection} from "../MainSliceSelection/MainSliceSelection.tsx";
@@ -17,7 +17,7 @@ interface ActiveSlice {
     index: number;
 }
 
-const mainSliceFieldSelector : DataFieldSelectorType = (item) => item.mainSlice;
+const mainSliceFieldSelector : DataItemFieldSelectorType = (item) => item.mainSlice;
 
 interface DashboardProps {
     fetchDataAmount: number;
