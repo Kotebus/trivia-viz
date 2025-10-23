@@ -3,7 +3,7 @@ import {API_CONFIG} from "../../api/ApiConfig.ts";
 import {fetchQuestions} from "../../api/TriviaApi.ts";
 import type {DataItem, DataItemFieldSelectorType} from "../../types/DataItem.ts";
 import {getDataWithCounts, getHtmlDecodedMainSliceData} from "../../utils.ts";
-import {DynamicDashboard} from "../DynamicDashboard/DynamicDashboard.tsx";
+import {DashboardWithFiltration} from "../DashboardWithFiltration/DashboardWithFiltration.tsx";
 import {DetailsBySliceChart} from "../DetailsBySliceChart/DetailsBySliceChart.tsx";
 import {LoadingPage} from "../LoadingPage/LoadingPage.tsx";
 
@@ -29,7 +29,7 @@ export const Dashboard = ({fetchDataAmount, allDataLabel, sourceData}: Dashboard
     const mainChartData = getDataWithCounts(cleanedData, mainSliceFieldSelector);
 
     return (
-        <DynamicDashboard
+        <DashboardWithFiltration
             isDataFromApiUndefined={data === undefined}
             error={error}
             data={cleanedData}

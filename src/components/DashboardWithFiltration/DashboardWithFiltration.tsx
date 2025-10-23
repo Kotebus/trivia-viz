@@ -5,7 +5,7 @@ import {DetailsBySliceChart} from "../DetailsBySliceChart/DetailsBySliceChart.ts
 import {FetchErrorMessage} from "../FetchErrorMessage/FetchErrorMessage.tsx";
 import {MainChart} from "../MainChart/MainChart.tsx";
 import {MainSliceSelection} from "../MainSliceSelection/MainSliceSelection.tsx";
-import styles from "./DynamicDashboard.module.css";
+import styles from "./DashboardWithFiltration.module.css";
 
 interface ActiveSlice {
     name: string;
@@ -21,7 +21,7 @@ interface DynamicDashboardProps {
     staticPieChart: ReactNode;
 }
 
-export const DynamicDashboard = ({
+export const DashboardWithFiltration = ({
                                      data,
                                      allSlicesLabel,
                                      isDataFromApiUndefined,
